@@ -3,7 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetBanking", "InternetBanking\InternetBanking.csproj", "{8570E899-F191-4FC0-9886-6F1619A336CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.InternetBanking", "InternetBanking\WebApp.InternetBanking.csproj", "{8570E899-F191-4FC0-9886-6F1619A336CC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{B3E73EA5-2858-48BE-A66C-5F20B0C3A780}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{F3B84A22-C966-4CA7-817C-176A4FB433AD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{4136E42E-DBF7-4337-9337-C787B5BD04F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApp", "WebApp", "{E8950772-2F26-4AF7-92D7-20F44E0D1E33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetBanking.Core.Domain", "InternetBanking.Core.Domain\InternetBanking.Core.Domain.csproj", "{0D8203BF-6891-439D-855C-7434742158DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetBanking.Core.Application", "InternetBanking.Core.Application\InternetBanking.Core.Application.csproj", "{99C13FBE-C132-4BA0-9D9F-77E3C0F42917}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetBanking.Infrastructure.Persistence", "InternetBanking.Infrastructure.Persistence\InternetBanking.Infrastructure.Persistence.csproj", "{39F65176-A6D1-4E0B-8D58-40DC03C38F9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetBanking.Infrastructure.Shared", "InternetBanking.Infrastructure.Shared\InternetBanking.Infrastructure.Shared.csproj", "{05B8D43E-41D7-4909-B20B-025D3E1D298F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +31,35 @@ Global
 		{8570E899-F191-4FC0-9886-6F1619A336CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8570E899-F191-4FC0-9886-6F1619A336CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8570E899-F191-4FC0-9886-6F1619A336CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D8203BF-6891-439D-855C-7434742158DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D8203BF-6891-439D-855C-7434742158DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D8203BF-6891-439D-855C-7434742158DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D8203BF-6891-439D-855C-7434742158DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99C13FBE-C132-4BA0-9D9F-77E3C0F42917}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99C13FBE-C132-4BA0-9D9F-77E3C0F42917}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99C13FBE-C132-4BA0-9D9F-77E3C0F42917}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99C13FBE-C132-4BA0-9D9F-77E3C0F42917}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39F65176-A6D1-4E0B-8D58-40DC03C38F9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39F65176-A6D1-4E0B-8D58-40DC03C38F9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39F65176-A6D1-4E0B-8D58-40DC03C38F9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39F65176-A6D1-4E0B-8D58-40DC03C38F9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05B8D43E-41D7-4909-B20B-025D3E1D298F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05B8D43E-41D7-4909-B20B-025D3E1D298F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05B8D43E-41D7-4909-B20B-025D3E1D298F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05B8D43E-41D7-4909-B20B-025D3E1D298F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8570E899-F191-4FC0-9886-6F1619A336CC} = {E8950772-2F26-4AF7-92D7-20F44E0D1E33}
+		{F3B84A22-C966-4CA7-817C-176A4FB433AD} = {B3E73EA5-2858-48BE-A66C-5F20B0C3A780}
+		{4136E42E-DBF7-4337-9337-C787B5BD04F5} = {B3E73EA5-2858-48BE-A66C-5F20B0C3A780}
+		{E8950772-2F26-4AF7-92D7-20F44E0D1E33} = {B3E73EA5-2858-48BE-A66C-5F20B0C3A780}
+		{0D8203BF-6891-439D-855C-7434742158DC} = {F3B84A22-C966-4CA7-817C-176A4FB433AD}
+		{99C13FBE-C132-4BA0-9D9F-77E3C0F42917} = {F3B84A22-C966-4CA7-817C-176A4FB433AD}
+		{39F65176-A6D1-4E0B-8D58-40DC03C38F9D} = {4136E42E-DBF7-4337-9337-C787B5BD04F5}
+		{05B8D43E-41D7-4909-B20B-025D3E1D298F} = {4136E42E-DBF7-4337-9337-C787B5BD04F5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {94341349-6F63-43EF-89D6-5CACE99191AF}
