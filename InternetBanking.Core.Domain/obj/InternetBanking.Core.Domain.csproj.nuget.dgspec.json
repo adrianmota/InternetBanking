@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj": {}
+    "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj": {
+    "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj",
         "projectName": "InternetBanking.Core.Domain",
-        "projectPath": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj",
+        "projectPath": "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj",
         "packagesPath": "C:\\Users\\Joel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Domain\\obj\\",
+        "outputPath": "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Core.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Joel\\AppData\\Roaming\\NuGet\\NuGet.Config",

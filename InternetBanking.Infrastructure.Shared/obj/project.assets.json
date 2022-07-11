@@ -1509,9 +1509,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Infrastructure.Shared\\InternetBanking.Infrastructure.Shared.csproj",
+      "projectUniqueName": "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Infrastructure.Shared\\InternetBanking.Infrastructure.Shared.csproj",
       "projectName": "InternetBanking.Infrastructure.Shared",
-      "projectPath": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Infrastructure.Shared\\InternetBanking.Infrastructure.Shared.csproj",
+      "projectPath": "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Infrastructure.Shared\\InternetBanking.Infrastructure.Shared.csproj",
       "packagesPath": "C:\\Users\\Joel\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Infrastructure.Shared\\obj\\",
       "projectStyle": "PackageReference",
@@ -1530,11 +1530,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Application\\InternetBanking.Core.Application.csproj": {
-              "projectPath": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Application\\InternetBanking.Core.Application.csproj"
+            "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Core.Application\\InternetBanking.Core.Application.csproj": {
+              "projectPath": "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Core.Application\\InternetBanking.Core.Application.csproj"
             },
-            "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj": {
-              "projectPath": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj"
+            "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj": {
+              "projectPath": "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj"
             }
           }
         }

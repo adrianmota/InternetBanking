@@ -1175,9 +1175,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Application\\InternetBanking.Core.Application.csproj",
+      "projectUniqueName": "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Core.Application\\InternetBanking.Core.Application.csproj",
       "projectName": "InternetBanking.Core.Application",
-      "projectPath": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Application\\InternetBanking.Core.Application.csproj",
+      "projectPath": "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Core.Application\\InternetBanking.Core.Application.csproj",
       "packagesPath": "C:\\Users\\Joel\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Application\\obj\\",
       "projectStyle": "PackageReference",
@@ -1196,8 +1196,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj": {
-              "projectPath": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj"
+            "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj": {
+              "projectPath": "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj"
             }
           }
         }

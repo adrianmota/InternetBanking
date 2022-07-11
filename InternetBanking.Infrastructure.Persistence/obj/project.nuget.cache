@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rxNNydiAs3oWtMw8Q5uP/m4gCyfa+9TchwEoTOKPjjJkyVnrdzv/hD16BtaeZ6anDKWEKuFXCIXlDD1B9WnB6g==",
+  "dgSpecHash": "dcd/YsxzYofAeFuLsAFn8sU9r/Ee6ijktBtbD63qAffuG8QaoYjw8VYm4V4xfI52gpd0aD5t1F+qx2wBmZrPSw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Infrastructure.Persistence\\InternetBanking.Infrastructure.Persistence.csproj",
+  "projectFilePath": "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Infrastructure.Persistence\\InternetBanking.Infrastructure.Persistence.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Joel\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\Joel\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
