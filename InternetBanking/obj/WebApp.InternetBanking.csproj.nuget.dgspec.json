@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking\\WebApp.InternetBanking.csproj": {}
+    "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking\\WebApp.InternetBanking.csproj": {}
   },
   "projects": {
-    "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking.Core.Application\\InternetBanking.Core.Application.csproj": {
+    "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Application\\InternetBanking.Core.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking.Core.Application\\InternetBanking.Core.Application.csproj",
+        "projectUniqueName": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Application\\InternetBanking.Core.Application.csproj",
         "projectName": "InternetBanking.Core.Application",
-        "projectPath": "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking.Core.Application\\InternetBanking.Core.Application.csproj",
-        "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking.Core.Application\\obj\\",
+        "projectPath": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Application\\InternetBanking.Core.Application.csproj",
+        "packagesPath": "C:\\Users\\Joel\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Joel\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj": {
-                "projectPath": "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj"
+              "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj": {
+                "projectPath": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj"
               }
             }
           }
@@ -43,6 +43,40 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[11.0.1, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[11.0.0, )"
+            },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
+            "Microsoft.AspNetCore.Http.Extensions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            },
+            "Microsoft.Extensions.Options.ConfigurationExtensions": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -62,17 +96,17 @@
         }
       }
     },
-    "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj": {
+    "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj",
         "projectName": "InternetBanking.Core.Domain",
-        "projectPath": "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj",
-        "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking.Core.Domain\\obj\\",
+        "projectPath": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj",
+        "packagesPath": "C:\\Users\\Joel\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Joel\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -116,17 +150,17 @@
         }
       }
     },
-    "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking\\WebApp.InternetBanking.csproj": {
+    "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking\\WebApp.InternetBanking.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking\\WebApp.InternetBanking.csproj",
+        "projectUniqueName": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking\\WebApp.InternetBanking.csproj",
         "projectName": "WebApp.InternetBanking",
-        "projectPath": "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking\\WebApp.InternetBanking.csproj",
-        "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking\\obj\\",
+        "projectPath": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking\\WebApp.InternetBanking.csproj",
+        "packagesPath": "C:\\Users\\Joel\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Joel\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -140,11 +174,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking.Core.Application\\InternetBanking.Core.Application.csproj": {
-                "projectPath": "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking.Core.Application\\InternetBanking.Core.Application.csproj"
+              "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Application\\InternetBanking.Core.Application.csproj": {
+                "projectPath": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Application\\InternetBanking.Core.Application.csproj"
               },
-              "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj": {
-                "projectPath": "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj"
+              "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj": {
+                "projectPath": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj"
               }
             }
           }
@@ -162,6 +196,16 @@
             "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
               "target": "Package",
               "version": "[5.0.17, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.17, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[5.0.2, )"
             }
           },
           "imports": [

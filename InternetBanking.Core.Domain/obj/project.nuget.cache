@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HmZt185kNUOjqe/Kd68JZk/cXaeGeMBinJKWE4TcNN/CCn72anWwocAoEsz4tPiQJmOOvyZaCyM8i1l0oi4pfw==",
+  "dgSpecHash": "sZJHmdAc2tUdEboT6pD0/CR4QyOJ9nTTJiO8iMVehCrdyFmtpgB0YwvyPhn/MgGjabtJyquJlDyIX2z37/rIzQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj",
+  "projectFilePath": "C:\\Users\\Joel\\Source\\Repos\\InternetBanking\\InternetBanking.Core.Domain\\InternetBanking.Core.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
