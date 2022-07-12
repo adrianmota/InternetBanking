@@ -1,3 +1,4 @@
+using InternetBanking.Core.Application;
 using InternetBanking.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,6 +29,7 @@ namespace InternetBanking
 
             //services registration
             services.AddPersistenceInfrastructure(Configuration);
+            services.AddApplicationLayer(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
