@@ -12,7 +12,6 @@
     <Folder Include="Helpers\" />
     <Folder Include="Dtos\" />
     <Folder Include="Interfaces\Services\" />
-    <Folder Include="Interfaces\Repositories\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Services\" />
   </ItemGroup>
