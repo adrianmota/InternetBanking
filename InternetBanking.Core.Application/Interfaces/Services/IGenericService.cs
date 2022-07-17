@@ -10,6 +10,5 @@ namespace InternetBanking.Core.Application.Interfaces.Services
         where T : class
         where VM : class
     {
-
     }
 }

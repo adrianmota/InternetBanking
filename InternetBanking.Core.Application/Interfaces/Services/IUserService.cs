@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace InternetBanking.Core.Application.Interfaces.Services
 {
-    public interface IUserService : IGenericService<User, UserViewModel>
+    public interface IUserService : IGenericService<UserViewModel, User>
     {
-
     }
 }

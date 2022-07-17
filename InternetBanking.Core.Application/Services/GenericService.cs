@@ -47,11 +47,9 @@ namespace InternetBanking.Core.Application.Services
                 case DMLAction.Insert:
                     await _repo.AddAsync(t);
                     break;
-
                 case DMLAction.Update:
                     await _repo.UpdateAsync(t, id);
                     break;
-
                 case DMLAction.Delete:
                     await _repo.DeleteAsync(t);
                     break;
@@ -61,9 +59,7 @@ namespace InternetBanking.Core.Application.Services
         public virtual async Task<VM> Add(VM vm)
         {
             T t = _mapper.Map<T>(vm);
-
             t = await _repo.AddAsync(t);
-
             VM gvm = _mapper.Map<VM>(t);
 
             return gvm;

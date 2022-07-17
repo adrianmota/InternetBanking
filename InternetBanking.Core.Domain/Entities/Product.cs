@@ -8,13 +8,16 @@ using System.Threading.Tasks;
 namespace InternetBanking.Core.Domain.Entities
 {
     public class Product : AuditableBaseEntity
-    { //All types of products: SavingAccounts, CreditCrads and Loans
+    {
+        //All types of products: SavingAccounts, CreditCrads and Loans
         public int Type { get; set; }
         public double Amount { get; set; }
-        public double? Limit { get; set; } //Only for CreditCards
+
+        //Only for CreditCards
+        public double? Limit { get; set; }
 
         #region relations
-        public int ClientId{ get; set; }
+        public int ClientId { get; set; }
 
         //Navigation props
         public User Client { get; set; }

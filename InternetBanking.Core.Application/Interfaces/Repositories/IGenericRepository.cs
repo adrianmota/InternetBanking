@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace InternetBanking.Core.Application.Interfaces.Repositories
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IGenericRepository<Entity>
+        where Entity : class
     {
-        Task<T> AddAsync(T t);
-        Task UpdateAsync(T t, int id);
-        Task DeleteAsync(T t);
-        Task<List<T>> GetAllAsync();
-        Task<T> GetByIdAsync(int id);
-        Task<List<T>> GetAllWithIncludesAsync(List<string> props);
-        Task<T> GetByIdWithIncludeAsync(int id, List<string> props, List<string> colls);
+        Task<Entity> AddAsync(Entity t);
+        Task UpdateAsync(Entity t, int id);
+        Task DeleteAsync(Entity t);
+        Task<List<Entity>> GetAllAsync();
+        Task<Entity> GetByIdAsync(int id);
+        Task<List<Entity>> GetAllWithIncludesAsync(List<string> props);
+        Task<Entity> GetByIdWithIncludeAsync(int id, List<string> props, List<string> colls);
     }
 }

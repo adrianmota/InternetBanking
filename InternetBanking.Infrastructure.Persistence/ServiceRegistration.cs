@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace InternetBanking.Infrastructure.Persistence
 {
-    public static class PServiceRegistration
+    public static class ServiceRegistration
     {
         public static void AddPersistenceInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {

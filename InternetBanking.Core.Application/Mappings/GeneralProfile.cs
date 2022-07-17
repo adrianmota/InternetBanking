@@ -4,11 +4,6 @@ using InternetBanking.Core.Application.ViewModels.Product;
 using InternetBanking.Core.Application.ViewModels.Transaction;
 using InternetBanking.Core.Application.ViewModels.User;
 using InternetBanking.Core.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InternetBanking.Core.Application.Mappings
 {
@@ -17,7 +12,7 @@ namespace InternetBanking.Core.Application.Mappings
         public GeneralProfile()
         {
             CreateMap<User, UserViewModel>()
-            .ReverseMap()
+                .ReverseMap()
                 .ForMember(d => d.Created, o => o.Ignore())
                 .ForMember(d => d.CreatedBy, o => o.Ignore())
                 .ForMember(d => d.Modified, o => o.Ignore())
@@ -25,7 +20,7 @@ namespace InternetBanking.Core.Application.Mappings
                 .ForMember(d => d.ClientBeneficiaries, o => o.Ignore());
 
             CreateMap<Product, ProductViewModel>()
-            .ReverseMap()
+                .ReverseMap()
                 .ForMember(d => d.Created, o => o.Ignore())
                 .ForMember(d => d.CreatedBy, o => o.Ignore())
                 .ForMember(d => d.Modified, o => o.Ignore())
@@ -39,7 +34,7 @@ namespace InternetBanking.Core.Application.Mappings
                 .ForMember(d => d.ClientBeneficiaries, o => o.Ignore());
 
             CreateMap<Pay, PayViewModel>()
-            .ReverseMap()
+                .ReverseMap()
                 .ForMember(d => d.CreatedBy, o => o.Ignore())
                 .ForMember(d => d.Modified, o => o.Ignore())
                 .ForMember(d => d.ModifiedBy, o => o.Ignore())
@@ -48,7 +43,7 @@ namespace InternetBanking.Core.Application.Mappings
                 .ForMember(d => d.AccountFromId, o => o.Ignore());
 
             CreateMap<Transaction, TransactionViewModel>()
-            .ReverseMap()
+                .ReverseMap()
                 .ForMember(d => d.CreatedBy, o => o.Ignore())
                 .ForMember(d => d.Modified, o => o.Ignore())
                 .ForMember(d => d.ModifiedBy, o => o.Ignore())

@@ -9,7 +9,9 @@ namespace InternetBanking.Core.Domain.Entities
 {
     public class Transaction : AuditableBaseEntity
     {
-        public int Type { get; set; } //Because CashAdvances are also storaged here; Types: Transaction and CashAdvance 
+        // Because CashAdvances are also storaged here
+        // Types: Transaction and CashAdvance
+        public int Type { get; set; }
         public double Amount { get; set; }
 
         #region relations
