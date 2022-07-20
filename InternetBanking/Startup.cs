@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApp.InternetBanking.Middlewares;
 
 namespace InternetBanking
 {
@@ -35,6 +36,7 @@ namespace InternetBanking
             services.AddIdentityInfrastructure(Configuration);
             services.AddApplicationLayer(Configuration);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<ValidateUserSession, ValidateUserSession>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

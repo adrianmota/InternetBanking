@@ -183,6 +183,30 @@ namespace InternetBanking.Infrastructure.Identity.Services
             return null;
         }
 
+        public async Task<List<UserViewModel>> GetAllUsers()
+        {
+            List<ApplicationUser> users = _userManager.Users.ToList();
+            List<UserViewModel> viewModelList = users.Select(user => new UserViewModel
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                DNI = user.DNI,
+                Email = user.Email,
+                UserName = user.UserName,
+                IsActive = user.EmailConfirmed,
+            }).ToList();
+
+            foreach (ApplicationUser user in users)
+            {
+                var roles = await _userManager.GetRolesAsync(user).ConfigureAwait(false);
+                string role = roles[0];
+                viewModelList[0].Role = role;
+            }
+
+            return viewModelList;
+        }
+
         public async Task SignOutAsync()
         {
             await _signInManager.SignOutAsync();
@@ -203,11 +227,6 @@ namespace InternetBanking.Infrastructure.Identity.Services
             };
 
             return null;
-        }
-
-        public Task<List<UserViewModel>> GetAllUserViewModel()
-        {
-            throw new NotImplementedException();
         }
     }
 }

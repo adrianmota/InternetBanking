@@ -42,6 +42,44 @@ namespace WebApp.InternetBanking.Controllers
             return RedirectToRoute(new { controller = "Home", action = "Index" });
         }
 
+        public IActionResult Create()
+        {
+            ViewBag.Roles = _userService.GetAllRoles();
+            return View(new SaveUserViewModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(SaveUserViewModel saveViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Roles = _userService.GetAllRoles();
+                return View(saveViewModel);
+            }
+
+            RegisterResponse response = await _userService.Add(saveViewModel);
+
+            if (response != null && response.HasError)
+            {
+                saveViewModel.HasError = response.HasError;
+                saveViewModel.Error = response.Error;
+                return View(saveViewModel);
+            }
+
+            return RedirectToRoute(new { controller = "User", action = "AdministrateUsers" });
+        }
+
+        public async Task<IActionResult> AdministrateUsers()
+        {
+            return View(await _userService.GetAllViewModel());
+        }
+
+        public async Task<IActionResult> SetUserStatus(string id)
+        {
+            await _userService.SetUserStatus(id);
+            return RedirectToRoute(new { controller = "User", action = "AdministrateUsers" });
+        }
+
         public async Task<IActionResult> LogOut()
         {
             await _userService.LogOut();

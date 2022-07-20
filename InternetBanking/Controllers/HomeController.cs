@@ -18,11 +18,6 @@ namespace InternetBanking.Controllers
             return View();
         }
 
-        public IActionResult UserAdministration()
-        {
-            return View();
-        }
-
         public IActionResult CreditCardPay()
         {
             return View();

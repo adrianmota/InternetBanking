@@ -876,10 +876,11 @@ C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Home\LoanPay.cshtml.g.cs
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Home\MoneyAdvance.cshtml.g.cs
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Home\Transaction.cshtml.g.cs
-C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Home\UserAdministration.cshtml.g.cs
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\User\AdministrateUsers.cshtml.g.cs
+C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\User\Create.cshtml.g.cs
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\User\Index.cshtml.g.cs
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\_ViewStart.cshtml.g.cs

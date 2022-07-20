@@ -1,0 +1,66 @@
+﻿@using InternetBanking.Core.Application.ViewModels.User
+@model SaveUserViewModel
+@{
+    ViewData["Title"] = "Crear Usuario";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white">
+                    <h4>Creando usuario</h4>
+                </div>
+                <div class="card-body">
+                    @Html.ValidationSummary(false, "", new {@class = "text-danger"})
+                    @if (Model.HasError)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <p>@Model.Error</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                    <form method="post" asp-controller="User" asp-action="Create">
+                        <div class="mb-3">
+                            <label asp-for="FirstName" class="form-label">Nombre</label>
+                            <input asp-for="FirstName" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="LastName" class="form-label">Apellido</label>
+                            <input asp-for="LastName" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="DNI" class="form-label">Cédula</label>
+                            <input asp-for="DNI" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">Correo</label>
+                            <input asp-for="Email" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="UserName" class="form-label">Nombre de usuario</label>
+                            <input asp-for="UserName" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label">Contraseña</label>
+                            <input asp-for="Password" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="ConfirmPassword" class="form-label">Confirmar contraseña</label>
+                            <input asp-for="ConfirmPassword" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Type" class="form-label">Tipo de usuario</label>
+                            <select asp-for="Type" asp-items="@(new SelectList(ViewBag.Roles, "Id", "Name"))" class="form-select">
+                                <option value="">Seleccione una opción</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Crear</button>
+                        <a class="btn btn-secondary" asp-controller="User" asp-action="AdministrateUsers">Volver atrás</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

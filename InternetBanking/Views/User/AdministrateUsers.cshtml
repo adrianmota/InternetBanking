@@ -1,0 +1,59 @@
+﻿@using InternetBanking.Core.Application.ViewModels.User
+@using Microsoft.AspNetCore.Http
+@using StockApp.Core.Application.Dtos.Account
+@using StockApp.Core.Application.Helpers
+@model List<UserViewModel>
+@inject IHttpContextAccessor httpContextAccessor
+@{
+    ViewData["Title"] = "Administración de Usuarios";
+    var currentUserLogged = httpContextAccessor.HttpContext.Session.Get<AuthenticationResponse>("user");
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4 offset-8 mb-3">
+            <a class="btn btn-outline-success w-100" asp-controller="User" asp-action="Create">Crear Usuario</a>
+        </div>
+    </div>
+    <div class="row">
+        @if (Model == null || Model.Count() == 0)
+        {
+            <div class="col-6 offset-3">
+                <h4>No hay usuarios registrados en el sistema</h4>
+            </div>
+        }
+        else
+        {
+            foreach (UserViewModel user in Model)
+            {
+                string message = user.IsActive ? "Activo" : "Inactivo";
+                <div class="col-4 mb-3">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h4>@user.FirstName @user.LastName</h4>
+                            <p>Tipo de usuario: @user.Role</p>
+                            <p>Estado: <small>@message</small></p>
+
+                            @if (currentUserLogged.Id != user.Id)
+                            {
+                                @if (user.IsActive)
+                                {
+                                    <a class="btn btn-outline-danger" asp-controller="User" asp-action="SetUserStatus" asp-route-id="@user.Id">Desactivar</a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-outline-success" asp-controller="User" asp-action="SetUserStatus" asp-route-id="@user.Id">Activar</a>
+                                }
+
+                                <div class="btn-group">
+                                    <a class="btn btn-outline-warning" asp-controller="User" asp-action="Edit" asp-route-id="@user.Id">Editar</a>
+                                    <a class="btn btn-outline-danger" asp-controller="User" asp-action="Delete" asp-route-id="@user.Id">Borrar</a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

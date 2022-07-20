@@ -44,5 +44,7 @@ namespace InternetBanking.Core.Application.ViewModels.User
         [DataType(DataType.Text)]
         public string Type { get; set; }
         public double Amount { get; set; }
+        public bool HasError { get; set; }
+        public string Error { get; set; }
     }
 }
