@@ -10,59 +10,70 @@ using System.Threading.Tasks;
 
 namespace InternetBanking.Core.Application.Services
 {
-    public class GenericService<T, VM> : IGenericService<T, VM>
-        where T : class
-        where VM : class
+    public class GenericService<SaveViewModel, ViewModel, Entity> : IGenericService<SaveViewModel, ViewModel, Entity>
+        where SaveViewModel : class
+        where ViewModel : class
+        where Entity : class
     {
-        private readonly IGenericRepository<T> _repo;
+        private readonly IGenericRepository<Entity> _repository;
         private readonly IMapper _mapper;
 
-        public GenericService(IGenericRepository<T> repo, IMapper mapper)
+        public GenericService(IGenericRepository<Entity> repository, IMapper mapper)
         {
-            _repo = repo;
+            _repository = repository;
             _mapper = mapper;
         }
 
-        public virtual async Task<List<VM>> GetAllViewModel()
+        public virtual async Task<ViewModel> Add(SaveViewModel vm)
         {
-            var tList = await _repo.GetAllAsync();
+            Entity entity = _mapper.Map<Entity>(vm);
+            entity = await _repository.AddAsync(entity);
+            ViewModel viewModel = _mapper.Map<ViewModel>(entity);
 
-            return _mapper.Map<List<VM>>(tList);
+            return viewModel;
         }
 
-        public virtual async Task<VM> GetByIdViewModel(int id)
+        public virtual async Task Update(SaveViewModel saveViewModel, int id)
         {
-            T t = await _repo.GetByIdAsync(id);
-            VM vm = _mapper.Map<VM>(t);
-
-            return vm;
+            Entity entity = _mapper.Map<Entity>(saveViewModel);
+            await _repository.UpdateAsync(entity, id);
         }
 
-        public virtual async Task DML(VM vm, DMLAction action, int id = 0)
+        public virtual async Task<List<ViewModel>> GetAllViewModel()
         {
-            T t = _mapper.Map<T>(vm);
-
-            switch (action)
-            {
-                case DMLAction.Insert:
-                    await _repo.AddAsync(t);
-                    break;
-                case DMLAction.Update:
-                    await _repo.UpdateAsync(t, id);
-                    break;
-                case DMLAction.Delete:
-                    await _repo.DeleteAsync(t);
-                    break;
-            }
+            var entities = await _repository.GetAllAsync();
+            return _mapper.Map<List<ViewModel>>(entities);
         }
 
-        public virtual async Task<VM> Add(VM vm)
+        public virtual async Task<SaveViewModel> GetByIdSaveViewModel(int id)
         {
-            T t = _mapper.Map<T>(vm);
-            t = await _repo.AddAsync(t);
-            VM gvm = _mapper.Map<VM>(t);
-
-            return gvm;
+            Entity entity = await _repository.GetByIdAsync(id);
+            SaveViewModel saveViewModel = _mapper.Map<SaveViewModel>(entity);
+            return saveViewModel;
         }
+
+        public virtual async Task Delete(int id)
+        {
+            Entity entity = await _repository.GetByIdAsync(id);
+            await _repository.DeleteAsync(entity);
+        }
+
+        //public virtual async Task DML(ViewModel vm, DMLAction action, int id = 0)
+        //{
+        //    Entity t = _mapper.Map<Entity>(vm);
+
+        //    switch (action)
+        //    {
+        //        case DMLAction.Insert:
+        //            await _repo.AddAsync(t);
+        //            break;
+        //        case DMLAction.Update:
+        //            await _repo.UpdateAsync(t, id);
+        //            break;
+        //        case DMLAction.Delete:
+        //            await _repo.DeleteAsync(t);
+        //            break;
+        //    }
+        //}
     }
 }

@@ -18,5 +18,7 @@ namespace InternetBanking.Core.Application.ViewModels.User
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Debe escribir una contraseña")]
         public string Password { get; set; }
+        public bool HasError { get; set; }
+        public string Error { get; set; }
     }
 }

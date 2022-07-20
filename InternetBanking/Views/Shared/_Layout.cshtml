@@ -1,4 +1,16 @@
-﻿<!DOCTYPE html>
+﻿@using InternetBanking.Infrastructure.Identity.Entities
+@using Microsoft.AspNetCore.Http
+@using StockApp.Core.Application.Dtos.Account
+@using StockApp.Core.Application.Helpers
+@inject IHttpContextAccessor httpContextAccessor
+@{
+    AuthenticationResponse user = httpContextAccessor.HttpContext.Session.Get<AuthenticationResponse>("user");
+    bool isAdmin = user != null ? user.Roles.Any(role => role == "Admin") : false;
+    bool isClient = user != null ? user.Roles.Any(role => role == "Client") : false;
+    string controller = (user != null) ? "Home" : "User";
+}
+
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8" />
@@ -11,25 +23,46 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">InternetBanking</a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">InternetBanking</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        @if (user != null)
+                        {
+                            @if (isAdmin)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Home" asp-action="UserAdministration">Administración de Usuarios</a>
+                                </li>
+                            }
+
+                            @if (isClient)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="#">Pagos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Home" asp-action="Beneficiaries">Beneficiarios</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Home" asp-action="MoneyAdvance">Avance de efectivo</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Home" asp-action="Transaction">Transferencia</a>
+                                </li>
+                            }
+
+                            <a asp-controller="User" asp-action="LogOut" class="text-dark text-decoration-none">Cerrar sesión</a>
+                        }
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -38,7 +71,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - InternetBanking - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; @DateTime.Now.Year - Internet Banking
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

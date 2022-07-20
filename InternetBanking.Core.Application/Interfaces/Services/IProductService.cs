@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InternetBanking.Core.Application.Interfaces.Services
 {
-    public interface IProductService : IGenericService<Product, ProductViewModel>
+    public interface IProductService : IGenericService<SaveProductViewModel, ProductViewModel, Product>
     {
     }
 }

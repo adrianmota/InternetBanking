@@ -18,7 +18,7 @@ namespace InternetBanking.Core.Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             //Dependency Injection
-            services.AddTransient(typeof(IGenericService<,>), typeof(GenericService<,>));
+            services.AddTransient(typeof(IGenericService<,,>), typeof(GenericService<,,>));
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IPayService, PayService>();

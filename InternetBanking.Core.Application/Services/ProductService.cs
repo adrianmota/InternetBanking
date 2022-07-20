@@ -12,14 +12,14 @@ using System.Threading.Tasks;
 
 namespace InternetBanking.Core.Application.Services
 {
-    public class ProductService : IGenericService<Product, ProductViewModel>, IProductService
+    public class ProductService : GenericService<SaveProductViewModel, ProductViewModel, Product>, IProductService
     {
-        private readonly IProductRepository _prodRepository;
+        private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
 
-        public ProductService(IProductRepository repo, IMapper mapper)
+        public ProductService(IProductRepository repository, IMapper mapper) : base(repository, mapper)
         {
-            _prodRepository = repo;
+            _productRepository = repository;
             _mapper = mapper;
         }
     }

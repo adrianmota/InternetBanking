@@ -868,10 +868,19 @@ C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\stati
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\WebApp.InternetBanking.TagHelpers.input.cache
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\WebApp.InternetBanking.TagHelpers.output.cache
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\WebApp.InternetBanking.RazorCoreGenerate.cache
+C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Home\Beneficiaries.cshtml.g.cs
+C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Home\CreditCardPay.cshtml.g.cs
+C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Home\ExpressPay.cshtml.g.cs
+C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Home\ForBeneficiaryPay.cshtml.g.cs
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
+C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Home\LoanPay.cshtml.g.cs
+C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Home\MoneyAdvance.cshtml.g.cs
+C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Home\Transaction.cshtml.g.cs
+C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Home\UserAdministration.cshtml.g.cs
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\User\Index.cshtml.g.cs
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\WebApp.InternetBanking.RazorTargetAssemblyInfo.cache
@@ -883,4 +892,3 @@ C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\refin
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\WebApp.InternetBanking.pdb
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\WebApp.InternetBanking.genruntimeconfig.cache
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\ref\WebApp.InternetBanking.dll
-C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\User\Index.cshtml.g.cs

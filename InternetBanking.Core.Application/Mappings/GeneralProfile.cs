@@ -4,6 +4,7 @@ using InternetBanking.Core.Application.ViewModels.Product;
 using InternetBanking.Core.Application.ViewModels.Transaction;
 using InternetBanking.Core.Application.ViewModels.User;
 using InternetBanking.Core.Domain.Entities;
+using StockApp.Core.Application.Dtos.Account;
 
 namespace InternetBanking.Core.Application.Mappings
 {
@@ -11,6 +12,13 @@ namespace InternetBanking.Core.Application.Mappings
     {
         public GeneralProfile()
         {
+            CreateMap<RegisterRequest, SaveUserViewModel>();
+
+            CreateMap<AuthenticationRequest, LoginViewModel>()
+                .ForMember(dest => dest.Error, opt => opt.Ignore())
+                .ForMember(dest => dest.HasError, opt => opt.Ignore())
+                .ReverseMap();
+
             CreateMap<User, UserViewModel>()
                 .ReverseMap()
                 .ForMember(d => d.Created, o => o.Ignore())
