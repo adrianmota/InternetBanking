@@ -261,12 +261,6 @@ namespace InternetBanking.Infrastructure.Identity.Services
             return saveViewModel;
         }
 
-        public async Task DeleteUserAsync(string id)
-        {
-            ApplicationUser user = await _userManager.FindByIdAsync(id);
-            await _userManager.DeleteAsync(user);
-        }
-
         public async Task<List<UserViewModel>> GetAllUsers()
         {
             List<ApplicationUser> users = _userManager.Users.ToList();

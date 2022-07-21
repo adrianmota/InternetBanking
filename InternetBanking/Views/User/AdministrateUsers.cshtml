@@ -38,17 +38,18 @@
                             {
                                 @if (user.IsActive)
                                 {
-                                    <a class="btn btn-outline-danger" asp-controller="User" asp-action="SetUserStatus" asp-route-id="@user.Id">Desactivar</a>
+                                    <div>
+                                        <a class="btn btn-outline-danger" asp-controller="User" asp-action="SetUserStatus" asp-route-id="@user.Id">Desactivar</a>
+                                        <a class="btn btn-outline-warning" asp-controller="User" asp-action="Edit" asp-route-id="@user.Id">Editar</a>
+                                    </div>
                                 }
                                 else
                                 {
-                                    <a class="btn btn-outline-success" asp-controller="User" asp-action="SetUserStatus" asp-route-id="@user.Id">Activar</a>
+                                    <div>
+                                        <a class="btn btn-outline-success" asp-controller="User" asp-action="SetUserStatus" asp-route-id="@user.Id">Activar</a>
+                                        <a class="btn btn-outline-warning" asp-controller="User" asp-action="Edit" asp-route-id="@user.Id">Editar</a>
+                                    </div>
                                 }
-
-                                <div class="btn-group">
-                                    <a class="btn btn-outline-warning" asp-controller="User" asp-action="Edit" asp-route-id="@user.Id">Editar</a>
-                                    <a class="btn btn-outline-danger" asp-controller="User" asp-action="Delete" asp-route-id="@user.Id">Borrar</a>
-                                </div>
                             }
                         </div>
                     </div>

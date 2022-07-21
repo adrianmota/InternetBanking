@@ -47,11 +47,6 @@ namespace InternetBanking.Core.Application.Services
             return response;
         }
 
-        public async Task Delete(string id)
-        {
-            await _accountService.DeleteUserAsync(id);
-        }
-
         public async Task<List<UserViewModel>> GetAllViewModel()
         {
             List<UserViewModel> viewModelList = await _accountService.GetAllUsers();

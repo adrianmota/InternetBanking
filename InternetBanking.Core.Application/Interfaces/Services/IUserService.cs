@@ -18,7 +18,6 @@ namespace InternetBanking.Core.Application.Interfaces.Services
         Task<SaveUserViewModel> GetByIdSaveViewModel(string id);
         Task<RegisterResponse> Update(SaveUserViewModel saveViewModel);
         List<RoleViewModel> GetAllRoles();
-        Task Delete(string id);
         Task SetUserStatus(string id);
         Task LogOut();
     }

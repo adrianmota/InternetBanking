@@ -31,7 +31,7 @@ namespace InternetBanking
             services.AddSession();
             services.AddControllersWithViews();
 
-            //services registration
+            //Services Registration
             services.AddPersistenceInfrastructure(Configuration);
             services.AddIdentityInfrastructure(Configuration);
             services.AddApplicationLayer(Configuration);

@@ -97,12 +97,6 @@ namespace WebApp.InternetBanking.Controllers
             return RedirectToRoute(new { controller = "User", action = "AdministrateUsers" });
         }
 
-        public async Task<IActionResult> Delete(string id)
-        {
-            await _userService.Delete(id);
-            return RedirectToRoute(new { controller = "User", action = "AdministrateUsers" });
-        }
-
         public async Task<IActionResult> AdministrateUsers()
         {
             return View(await _userService.GetAllViewModel());
