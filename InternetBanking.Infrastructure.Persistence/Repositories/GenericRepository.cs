@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InternetBanking.Infrastructure.Persistence.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<Entity> : IGenericRepository<Entity> where Entity : class
     {
         private readonly ApplicationContext _dbContext;
 
@@ -18,39 +18,39 @@ namespace InternetBanking.Infrastructure.Persistence.Repositories
             _dbContext = dbContext;
         }
 
-        public virtual async Task<T> AddAsync(T t)
+        public virtual async Task<Entity> AddAsync(Entity t)
         {
-            await _dbContext.Set<T>().AddAsync(t);
+            await _dbContext.Set<Entity>().AddAsync(t);
             await _dbContext.SaveChangesAsync();
             return t;
         }
 
-        public async Task UpdateAsync(T t, int id)
+        public async Task UpdateAsync(Entity t, int id)
         {
-            T entry = await _dbContext.Set<T>().FindAsync(id);
+            Entity entry = await _dbContext.Set<Entity>().FindAsync(id);
             _dbContext.Entry(entry).CurrentValues.SetValues(t);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(T t)
+        public async Task DeleteAsync(Entity t)
         {
-            _dbContext.Set<T>().Remove(t);
+            _dbContext.Set<Entity>().Remove(t);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<List<T>> GetAllAsync()
+        public async Task<List<Entity>> GetAllAsync()
         {
-            return await _dbContext.Set<T>().ToListAsync();
+            return await _dbContext.Set<Entity>().ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<Entity> GetByIdAsync(int id)
         {
-            return await _dbContext.Set<T>().FindAsync(id);
+            return await _dbContext.Set<Entity>().FindAsync(id);
         }
 
-        public virtual async Task<List<T>> GetAllWithIncludesAsync(List<string> props)
+        public virtual async Task<List<Entity>> GetAllWithIncludesAsync(List<string> props)
         {
-            var query = _dbContext.Set<T>().AsQueryable();
+            var query = _dbContext.Set<Entity>().AsQueryable();
 
             foreach (string prop in props)
             {
@@ -60,9 +60,9 @@ namespace InternetBanking.Infrastructure.Persistence.Repositories
             return await query.ToListAsync();
         }
 
-        public virtual async Task<T> GetByIdWithIncludeAsync(int id, List<string> props, List<string> colls)
+        public virtual async Task<Entity> GetByIdWithIncludeAsync(int id, List<string> props, List<string> colls)
         {
-            var query = await _dbContext.Set<T>().FindAsync(id);
+            var query = await _dbContext.Set<Entity>().FindAsync(id);
 
             foreach (string prop in props)
             {

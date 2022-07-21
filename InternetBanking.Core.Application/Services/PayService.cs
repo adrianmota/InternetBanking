@@ -12,14 +12,14 @@ using System.Threading.Tasks;
 
 namespace InternetBanking.Core.Application.Services
 {
-    public class PayService : IGenericService<Pay, PayViewModel>, IPayService
+    public class PayService : GenericService<SavePayViewModel, PayViewModel, Pay>, IPayService
     {
         private readonly IPayRepository _payRepository;
         private readonly IMapper _mapper;
 
-        public PayService(IPayRepository repo, IMapper mapper)
+        public PayService(IPayRepository repository, IMapper mapper) : base(repository, mapper)
         {
-            _payRepository = repo;
+            _payRepository = repository;
             _mapper = mapper;
         }
     }

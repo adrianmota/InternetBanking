@@ -17,5 +17,40 @@ namespace InternetBanking.Controllers
         {
             return View();
         }
+
+        public IActionResult CreditCardPay()
+        {
+            return View();
+        }
+
+        public IActionResult ForBeneficiaryPay()
+        {
+            return View();
+        }
+
+        public IActionResult LoanPay()
+        {
+            return View();
+        }
+
+        public IActionResult ExpressPay()
+        {
+            return View();
+        }
+
+        public IActionResult Beneficiaries()
+        {
+            return View();
+        }
+
+        public IActionResult MoneyAdvance()
+        {
+            return View();
+        }
+
+        public IActionResult Transaction()
+        {
+            return View();
+        }
     }
 }

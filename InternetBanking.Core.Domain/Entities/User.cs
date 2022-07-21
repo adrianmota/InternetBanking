@@ -15,7 +15,9 @@ namespace InternetBanking.Core.Domain.Entities
         public string Email { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public int Type { get; set; } //For difference between Admin and Client
+
+        //For difference between Admin and Client
+        public int Type { get; set; } 
         public bool Active { get; set; }
 
         #region relations

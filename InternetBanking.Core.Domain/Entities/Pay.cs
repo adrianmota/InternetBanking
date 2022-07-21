@@ -23,7 +23,8 @@ namespace InternetBanking.Core.Domain.Entities
         public Product AccountTo { get; set; }
         #endregion
 
-        //Explanation for Direct: Le puse Direct y no Express porque Express en ingles es como "Rapido" xd, y un pago
-        //                      expreso es como un pago directo entre usuario y usuario, no necesariamente rapido
+        //Explanation for Direct:
+        //Le puse Direct y no Express porque Express en ingles es como "Rapido" xd, y un pago
+        //expreso es como un pago directo entre usuario y usuario, no necesariamente rapido
     }
 }
