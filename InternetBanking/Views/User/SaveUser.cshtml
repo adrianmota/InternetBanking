@@ -1,10 +1,10 @@
 ﻿@using InternetBanking.Core.Application.ViewModels.User
 @model SaveUserViewModel
 @{
-    ViewData["Title"] = "Crear Usuario";
     bool editMode = (Model.Id != null) ? true : false;
     string title = editMode ? "Editando usuario" : "Creando usuario";
     string actionMethod = editMode ? "Edit" : "Create";
+    ViewData["Title"] = title;
 }
 
 <div class="container-fluid">
@@ -52,14 +52,34 @@
                             <label asp-for="ConfirmPassword" class="form-label">Confirmar contraseña</label>
                             <input asp-for="ConfirmPassword" class="form-control" />
                         </div>
-                        <div class="mb-3">
-                            <label asp-for="Type" class="form-label">Tipo de usuario</label>
-                            <select asp-for="Type" asp-items="@(new SelectList(ViewBag.Roles, "Id", "Name"))" class="form-select">
-                                <option value="">Seleccione una opción</option>
-                            </select>
-                        </div>
+                        @if (editMode)
+                        {
+                            @if (Model.Role == "Client")
+                            {
+                                <div class="mb-3">
+                                    <label asp-for="Amount" class="form-label">Monto Adicional</label>
+                                    <input asp-for="Amount" class="form-control" />
+                                </div>
+                            }
 
-                        <button type="submit" class="btn btn-primary">Crear</button>
+                            <input asp-for="Type" hidden/>
+                        }
+                        else
+                        {
+                            <div class="mb-3">
+                                <label for="user-type-form-field" asp-for="Type" class="form-label">Tipo de usuario</label>
+                                <select id="user-type-form-field" asp-for="Type" asp-items="@(new SelectList(ViewBag.Roles, "Id", "Name"))" class="form-select">
+                                    <option value="">Seleccione una opción</option>
+                                </select>
+                            </div>
+
+                            <div id="amount-form-field" class="mb-3" hidden>
+                                <label asp-for="Amount" class="form-label">Monto Inicial</label>
+                                <input asp-for="Amount" class="form-control" />
+                            </div>
+                        }
+
+                        <button type="submit" class="btn btn-primary">Guardar</button>
                         <a class="btn btn-secondary" asp-controller="User" asp-action="AdministrateUsers">Volver atrás</a>
                     </form>
                 </div>

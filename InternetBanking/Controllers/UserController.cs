@@ -85,6 +85,21 @@ namespace WebApp.InternetBanking.Controllers
                 return View("SaveUser", saveViewModel);
             }
 
+            RegisterResponse response = await _userService.Update(saveViewModel);
+
+            if (response != null && response.HasError)
+            {
+                saveViewModel.HasError = true;
+                saveViewModel.Error = response.Error;
+                return View("SaveUser", saveViewModel);
+            }
+
+            return RedirectToRoute(new { controller = "User", action = "AdministrateUsers" });
+        }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            await _userService.Delete(id);
             return RedirectToRoute(new { controller = "User", action = "AdministrateUsers" });
         }
 

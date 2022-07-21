@@ -40,6 +40,18 @@ namespace InternetBanking.Core.Application.Services
             return response;
         }
 
+        public async Task<RegisterResponse> Update(SaveUserViewModel saveViewModel)
+        {
+            RegisterRequest request = _mapper.Map<RegisterRequest>(saveViewModel);
+            RegisterResponse response = await _accountService.UpdateUserAsync(request);
+            return response;
+        }
+
+        public async Task Delete(string id)
+        {
+            await _accountService.DeleteUserAsync(id);
+        }
+
         public async Task<List<UserViewModel>> GetAllViewModel()
         {
             List<UserViewModel> viewModelList = await _accountService.GetAllUsers();

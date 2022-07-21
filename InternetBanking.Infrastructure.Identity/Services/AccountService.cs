@@ -187,7 +187,7 @@ namespace InternetBanking.Infrastructure.Identity.Services
         public async Task<RegisterResponse> UpdateUserAsync(RegisterRequest request)
         {
             RegisterResponse response = new();
-            response.HasError = true;
+            response.HasError = false;
 
             ApplicationUser user = await _userManager.FindByIdAsync(request.Id);
 
@@ -259,6 +259,12 @@ namespace InternetBanking.Infrastructure.Identity.Services
             };
 
             return saveViewModel;
+        }
+
+        public async Task DeleteUserAsync(string id)
+        {
+            ApplicationUser user = await _userManager.FindByIdAsync(id);
+            await _userManager.DeleteAsync(user);
         }
 
         public async Task<List<UserViewModel>> GetAllUsers()

@@ -17,6 +17,7 @@ namespace InternetBanking.Core.Application.Interfaces.Services
         Task<RegisterResponse> UpdateUserAsync(RegisterRequest request);
         Task<List<UserViewModel>> GetAllUsers();
         Task<SaveUserViewModel> GetByIdSaveViewModel(string id);
+        Task DeleteUserAsync(string id);
         Task SignOutAsync();
     }
 }
