@@ -46,6 +46,22 @@ namespace InternetBanking.Core.Application.Services
             return viewModelList;
         }
 
+        public async Task<SaveUserViewModel> GetByIdSaveViewModel(string id)
+        {
+            var roles = _roleService.GetAllRoles();
+            SaveUserViewModel user = await _accountService.GetByIdSaveViewModel(id);
+
+            foreach (var role in roles)
+            {
+                if (role.Name == user.Role)
+                {
+                    user.Type = role.Id;
+                }
+            }
+
+            return user;
+        }
+
         public List<RoleViewModel> GetAllRoles()
         {
             List<RoleViewModel> roles = _roleService.GetAllRoles();

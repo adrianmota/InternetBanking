@@ -117,7 +117,8 @@ namespace InternetBanking.Infrastructure.Identity.Services
                 Email = request.Email,
                 UserName = request.UserName,
                 FirstName = request.FirstName,
-                LastName = request.LastName
+                LastName = request.LastName,
+                DNI = request.DNI
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);
@@ -183,6 +184,83 @@ namespace InternetBanking.Infrastructure.Identity.Services
             return null;
         }
 
+        public async Task<RegisterResponse> UpdateUserAsync(RegisterRequest request)
+        {
+            RegisterResponse response = new();
+            response.HasError = true;
+
+            ApplicationUser user = await _userManager.FindByIdAsync(request.Id);
+
+            if (user == null)
+            {
+                response.HasError = true;
+                response.Error = "User not found";
+                return response;
+            }
+
+            if (request.Email != user.Email)
+            {
+                ApplicationUser userWithSameEmail = await _userManager.FindByEmailAsync(request.Email);
+
+                if (userWithSameEmail != null)
+                {
+                    response.HasError = true;
+                    response.Error = "An user exists with the same email";
+                    return response;
+                }
+            }
+
+            if (request.UserName != user.UserName)
+            {
+                ApplicationUser userWithSameUserName = await _userManager.FindByNameAsync(request.UserName);
+
+                if (userWithSameUserName != null)
+                {
+                    response.HasError = true;
+                    response.Error = "An user exists with the same username";
+                    return response;
+                }
+            }
+
+            user.FirstName = request.FirstName;
+            user.LastName = request.LastName;
+            user.UserName = request.UserName;
+            user.Email = request.Email;
+            user.DNI = request.DNI;
+            user.PasswordHash = request.Password;
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+            {
+                response.HasError = true;
+                response.Error = "An error occurred during the update of the user";
+                return response;
+            }
+
+            return response;
+        }
+
+        public async Task<SaveUserViewModel> GetByIdSaveViewModel(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            var roles = await _userManager.GetRolesAsync(user).ConfigureAwait(false);
+            var role = roles[0];
+
+            SaveUserViewModel saveViewModel = new SaveUserViewModel
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                DNI = user.DNI,
+                Email = user.Email,
+                UserName = user.UserName,
+                Role = role
+            };
+
+            return saveViewModel;
+        }
+
         public async Task<List<UserViewModel>> GetAllUsers()
         {
             List<ApplicationUser> users = _userManager.Users.ToList();
@@ -197,11 +275,14 @@ namespace InternetBanking.Infrastructure.Identity.Services
                 IsActive = user.EmailConfirmed,
             }).ToList();
 
+            int counter = 0;
+
             foreach (ApplicationUser user in users)
             {
                 var roles = await _userManager.GetRolesAsync(user).ConfigureAwait(false);
                 string role = roles[0];
-                viewModelList[0].Role = role;
+                viewModelList[counter].Role = role;
+                counter++;
             }
 
             return viewModelList;
@@ -210,23 +291,6 @@ namespace InternetBanking.Infrastructure.Identity.Services
         public async Task SignOutAsync()
         {
             await _signInManager.SignOutAsync();
-        }
-
-        public async Task<RegisterResponse> UpdateUserAsync(RegisterRequest request)
-        {
-            RegisterResponse response = new();
-
-            var user = new ApplicationUser
-            {
-                Id = request.Id,
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                Email = request.Email,
-                UserName = request.UserName,
-                DNI = request.DNI,
-            };
-
-            return null;
         }
     }
 }

@@ -2,6 +2,9 @@
 @model SaveUserViewModel
 @{
     ViewData["Title"] = "Crear Usuario";
+    bool editMode = (Model.Id != null) ? true : false;
+    string title = editMode ? "Editando usuario" : "Creando usuario";
+    string actionMethod = editMode ? "Edit" : "Create";
 }
 
 <div class="container-fluid">
@@ -9,7 +12,7 @@
         <div class="col-6 offset-3">
             <div class="card shadow-sm">
                 <div class="card-header bg-dark text-white">
-                    <h4>Creando usuario</h4>
+                    <h4 class="text-center">@title</h4>
                 </div>
                 <div class="card-body">
                     @Html.ValidationSummary(false, "", new {@class = "text-danger"})
@@ -20,7 +23,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     }
-                    <form method="post" asp-controller="User" asp-action="Create">
+                    <form method="post" asp-controller="User" asp-action="@actionMethod">
                         <div class="mb-3">
                             <label asp-for="FirstName" class="form-label">Nombre</label>
                             <input asp-for="FirstName" class="form-control" />

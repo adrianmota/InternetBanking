@@ -45,7 +45,7 @@ namespace WebApp.InternetBanking.Controllers
         public IActionResult Create()
         {
             ViewBag.Roles = _userService.GetAllRoles();
-            return View(new SaveUserViewModel());
+            return View("SaveUser", new SaveUserViewModel());
         }
 
         [HttpPost]
@@ -54,7 +54,7 @@ namespace WebApp.InternetBanking.Controllers
             if (!ModelState.IsValid)
             {
                 ViewBag.Roles = _userService.GetAllRoles();
-                return View(saveViewModel);
+                return View("SaveUser", saveViewModel);
             }
 
             RegisterResponse response = await _userService.Add(saveViewModel);
@@ -63,7 +63,26 @@ namespace WebApp.InternetBanking.Controllers
             {
                 saveViewModel.HasError = response.HasError;
                 saveViewModel.Error = response.Error;
-                return View(saveViewModel);
+                return View("SaveUser", saveViewModel);
+            }
+
+            return RedirectToRoute(new { controller = "User", action = "AdministrateUsers" });
+        }
+
+        public async Task<IActionResult> Edit(string id)
+        {
+            SaveUserViewModel saveViewModel = await _userService.GetByIdSaveViewModel(id);
+            ViewBag.Roles = _userService.GetAllRoles();
+            return View("SaveUser", saveViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(SaveUserViewModel saveViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Roles = _userService.GetAllRoles();
+                return View("SaveUser", saveViewModel);
             }
 
             return RedirectToRoute(new { controller = "User", action = "AdministrateUsers" });

@@ -12,7 +12,11 @@ namespace InternetBanking.Core.Application.Mappings
     {
         public GeneralProfile()
         {
-            CreateMap<RegisterRequest, SaveUserViewModel>();
+            CreateMap<RegisterRequest, SaveUserViewModel>()
+                .ForMember(dest => dest.HasError, opt => opt.Ignore())
+                .ForMember(dest => dest.Error, opt => opt.Ignore())
+                .ForMember(dest => dest.Role, opt => opt.Ignore())
+                .ReverseMap();
 
             CreateMap<AuthenticationRequest, LoginViewModel>()
                 .ForMember(dest => dest.Error, opt => opt.Ignore())

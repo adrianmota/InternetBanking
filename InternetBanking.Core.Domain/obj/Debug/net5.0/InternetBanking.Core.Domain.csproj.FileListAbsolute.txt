@@ -10,15 +10,3 @@ C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Core.Domain\obj\Debug
 C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Core.Domain\obj\Debug\net5.0\refint\InternetBanking.Core.Domain.dll
 C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Core.Domain\obj\Debug\net5.0\InternetBanking.Core.Domain.pdb
 C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Core.Domain\obj\Debug\net5.0\ref\InternetBanking.Core.Domain.dll
-C:\Users\LENOVO\workspace\InternetBanking\InternetBanking.Core.Domain\bin\Debug\net5.0\InternetBanking.Core.Domain.deps.json
-C:\Users\LENOVO\workspace\InternetBanking\InternetBanking.Core.Domain\bin\Debug\net5.0\InternetBanking.Core.Domain.dll
-C:\Users\LENOVO\workspace\InternetBanking\InternetBanking.Core.Domain\bin\Debug\net5.0\InternetBanking.Core.Domain.pdb
-C:\Users\LENOVO\workspace\InternetBanking\InternetBanking.Core.Domain\obj\Debug\net5.0\InternetBanking.Core.Domain.csproj.AssemblyReference.cache
-C:\Users\LENOVO\workspace\InternetBanking\InternetBanking.Core.Domain\obj\Debug\net5.0\InternetBanking.Core.Domain.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\LENOVO\workspace\InternetBanking\InternetBanking.Core.Domain\obj\Debug\net5.0\InternetBanking.Core.Domain.AssemblyInfoInputs.cache
-C:\Users\LENOVO\workspace\InternetBanking\InternetBanking.Core.Domain\obj\Debug\net5.0\InternetBanking.Core.Domain.AssemblyInfo.cs
-C:\Users\LENOVO\workspace\InternetBanking\InternetBanking.Core.Domain\obj\Debug\net5.0\InternetBanking.Core.Domain.csproj.CoreCompileInputs.cache
-C:\Users\LENOVO\workspace\InternetBanking\InternetBanking.Core.Domain\obj\Debug\net5.0\InternetBanking.Core.Domain.dll
-C:\Users\LENOVO\workspace\InternetBanking\InternetBanking.Core.Domain\obj\Debug\net5.0\refint\InternetBanking.Core.Domain.dll
-C:\Users\LENOVO\workspace\InternetBanking\InternetBanking.Core.Domain\obj\Debug\net5.0\InternetBanking.Core.Domain.pdb
-C:\Users\LENOVO\workspace\InternetBanking\InternetBanking.Core.Domain\obj\Debug\net5.0\ref\InternetBanking.Core.Domain.dll
