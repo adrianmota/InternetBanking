@@ -21,8 +21,8 @@ namespace InternetBanking.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("InternetBanking.Core.Domain.Entities.Beneficiary", b =>
                 {
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
+                    b.Property<string>("ClientId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AccountId")
                         .HasColumnType("int");
@@ -49,51 +49,6 @@ namespace InternetBanking.Infrastructure.Persistence.Migrations
                     b.ToTable("Beneficiaries");
                 });
 
-            modelBuilder.Entity("InternetBanking.Core.Domain.Entities.Pay", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AccountFromId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AccountToId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Amount")
-                        .HasColumnType("float");
-
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("Modified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccountFromId");
-
-                    b.HasIndex("AccountToId");
-
-                    b.HasIndex("ClientId");
-
-                    b.ToTable("Pays");
-                });
-
             modelBuilder.Entity("InternetBanking.Core.Domain.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -104,8 +59,9 @@ namespace InternetBanking.Infrastructure.Persistence.Migrations
                     b.Property<double>("Amount")
                         .HasColumnType("float");
 
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
+                    b.Property<string>("ClientId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
@@ -127,8 +83,6 @@ namespace InternetBanking.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId");
-
                     b.ToTable("Products");
                 });
 
@@ -148,8 +102,9 @@ namespace InternetBanking.Infrastructure.Persistence.Migrations
                     b.Property<double>("Amount")
                         .HasColumnType("float");
 
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
+                    b.Property<string>("ClientId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
@@ -172,120 +127,18 @@ namespace InternetBanking.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("AccountToId");
 
-                    b.HasIndex("ClientId");
-
                     b.ToTable("Transactions");
-                });
-
-            modelBuilder.Entity("InternetBanking.Core.Domain.Entities.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DNI")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("Modified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("InternetBanking.Core.Domain.Entities.Beneficiary", b =>
                 {
                     b.HasOne("InternetBanking.Core.Domain.Entities.Product", "Account")
-                        .WithMany("ClientBeneficiaries")
+                        .WithMany("Beneficiaries")
                         .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("InternetBanking.Core.Domain.Entities.User", "Client")
-                        .WithMany("ClientBeneficiaries")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Account");
-
-                    b.Navigation("Client");
-                });
-
-            modelBuilder.Entity("InternetBanking.Core.Domain.Entities.Pay", b =>
-                {
-                    b.HasOne("InternetBanking.Core.Domain.Entities.Product", "AccountFrom")
-                        .WithMany("PaysOut")
-                        .HasForeignKey("AccountFromId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("InternetBanking.Core.Domain.Entities.Product", "AccountTo")
-                        .WithMany("PaysIn")
-                        .HasForeignKey("AccountToId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("InternetBanking.Core.Domain.Entities.User", "Client")
-                        .WithMany("Pays")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("AccountFrom");
-
-                    b.Navigation("AccountTo");
-
-                    b.Navigation("Client");
-                });
-
-            modelBuilder.Entity("InternetBanking.Core.Domain.Entities.Product", b =>
-                {
-                    b.HasOne("InternetBanking.Core.Domain.Entities.User", "Client")
-                        .WithMany("Products")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("InternetBanking.Core.Domain.Entities.Transaction", b =>
@@ -302,41 +155,18 @@ namespace InternetBanking.Infrastructure.Persistence.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("InternetBanking.Core.Domain.Entities.User", "Client")
-                        .WithMany("Transactions")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("AccountFrom");
 
                     b.Navigation("AccountTo");
-
-                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("InternetBanking.Core.Domain.Entities.Product", b =>
                 {
-                    b.Navigation("ClientBeneficiaries");
-
-                    b.Navigation("PaysIn");
-
-                    b.Navigation("PaysOut");
+                    b.Navigation("Beneficiaries");
 
                     b.Navigation("TransactionsIn");
 
                     b.Navigation("TransactionsOut");
-                });
-
-            modelBuilder.Entity("InternetBanking.Core.Domain.Entities.User", b =>
-                {
-                    b.Navigation("ClientBeneficiaries");
-
-                    b.Navigation("Pays");
-
-                    b.Navigation("Products");
-
-                    b.Navigation("Transactions");
                 });
 #pragma warning restore 612, 618
         }

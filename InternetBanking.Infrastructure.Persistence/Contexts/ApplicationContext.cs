@@ -14,7 +14,7 @@ namespace InternetBanking.Infrastructure.Persistence.Contexts
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
-        public DbSet<Pay> Pays { get; set; }
+        //public DbSet<Pay> Pays { get; set; }
         public DbSet<Beneficiary> Beneficiaries { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -22,14 +22,14 @@ namespace InternetBanking.Infrastructure.Persistence.Contexts
             #region tables
             builder.Entity<Product>().ToTable("Products");
             builder.Entity<Transaction>().ToTable("Transactions");
-            builder.Entity<Pay>().ToTable("Pays");
+            //builder.Entity<Pay>().ToTable("Pays");
             builder.Entity<Beneficiary>().ToTable("Beneficiaries");
             #endregion
 
             #region keys
             builder.Entity<Product>().HasKey(t => t.Id);
             builder.Entity<Transaction>().HasKey(t => t.Id);
-            builder.Entity<Pay>().HasKey(t => t.Id);
+            //builder.Entity<Pay>().HasKey(t => t.Id);
             builder.Entity<Beneficiary>().HasKey(t => new { t.ClientId, t.AccountId });
             #endregion
 
@@ -46,19 +46,19 @@ namespace InternetBanking.Infrastructure.Persistence.Contexts
             //Weak relationship
             //ForeignKey(Transaction.ClientId)
 
-            //Product-Pays(Out), this one for the Pays that came out from the Product/Account
-            builder.Entity<Product>()
-                .HasMany<Pay>(prod => prod.PaysOut)
-                .WithOne(pay => pay.AccountFrom)
-                .HasForeignKey(pay => pay.AccountFromId)
-                .OnDelete(DeleteBehavior.NoAction);
+            ////Product-Pays(Out), this one for the Pays that came out from the Product/Account
+            //builder.Entity<Product>()
+            //    .HasMany<Pay>(prod => prod.PaysOut)
+            //    .WithOne(pay => pay.AccountFrom)
+            //    .HasForeignKey(pay => pay.AccountFromId)
+            //    .OnDelete(DeleteBehavior.NoAction);
 
-            //Product-Pays(In), this one for the Pays that enter the Product/Account
-            builder.Entity<Product>()
-                .HasMany<Pay>(prod => prod.PaysIn)
-                .WithOne(pay => pay.AccountTo)
-                .HasForeignKey(pay => pay.AccountToId)
-                .OnDelete(DeleteBehavior.NoAction);
+            ////Product-Pays(In), this one for the Pays that enter the Product/Account
+            //builder.Entity<Product>()
+            //    .HasMany<Pay>(prod => prod.PaysIn)
+            //    .WithOne(pay => pay.AccountTo)
+            //    .HasForeignKey(pay => pay.AccountToId)
+            //    .OnDelete(DeleteBehavior.NoAction);
 
             //Product-Transactions(Out), this one for the Transactions that came out from the Product/Account
             builder.Entity<Product>()
@@ -103,13 +103,13 @@ namespace InternetBanking.Infrastructure.Persistence.Contexts
             builder.Entity<Product>().Property(t => t.ClientId).IsRequired();
             #endregion
 
-            #region pays
-            builder.Entity<Pay>().Property(t => t.Type).IsRequired();
-            builder.Entity<Pay>().Property(t => t.Amount).IsRequired();
-            builder.Entity<Pay>().Property(t => t.ClientId).IsRequired();
-            builder.Entity<Pay>().Property(t => t.AccountFromId).IsRequired();
-            builder.Entity<Pay>().Property(t => t.AccountToId).IsRequired();
-            #endregion
+            //#region pays
+            //builder.Entity<Pay>().Property(t => t.Type).IsRequired();
+            //builder.Entity<Pay>().Property(t => t.Amount).IsRequired();
+            //builder.Entity<Pay>().Property(t => t.ClientId).IsRequired();
+            //builder.Entity<Pay>().Property(t => t.AccountFromId).IsRequired();
+            //builder.Entity<Pay>().Property(t => t.AccountToId).IsRequired();
+            //#endregion
 
             #region transactions
             builder.Entity<Transaction>().Property(t => t.Type).IsRequired();

@@ -30,8 +30,6 @@ namespace InternetBanking.Core.Application.Mappings
                 .ForMember(d => d.Modified, o => o.Ignore())
                 .ForMember(d => d.ModifiedBy, o => o.Ignore())
                 .ForMember(d => d.ClientId, o => o.Ignore())
-                .ForMember(d => d.PaysIn, o => o.Ignore())
-                .ForMember(d => d.PaysOut, o => o.Ignore())
                 .ForMember(d => d.TransactionsIn, o => o.Ignore())
                 .ForMember(d => d.TransactionsOut, o => o.Ignore())
                 .ForMember(d => d.Beneficiaries, o => o.Ignore());
