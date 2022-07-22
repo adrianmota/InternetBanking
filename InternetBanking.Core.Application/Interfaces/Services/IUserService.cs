@@ -16,6 +16,7 @@ namespace InternetBanking.Core.Application.Interfaces.Services
         Task<RegisterResponse> Add(SaveUserViewModel saveViewModel);
         Task<List<UserViewModel>> GetAllViewModel();
         Task<SaveUserViewModel> GetByIdSaveViewModel(string id);
+        Task<RegisterResponse> Update(SaveUserViewModel saveViewModel);
         List<RoleViewModel> GetAllRoles();
         Task SetUserStatus(string id);
         Task LogOut();

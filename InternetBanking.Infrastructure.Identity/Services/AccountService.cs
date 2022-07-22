@@ -187,7 +187,7 @@ namespace InternetBanking.Infrastructure.Identity.Services
         public async Task<RegisterResponse> UpdateUserAsync(RegisterRequest request)
         {
             RegisterResponse response = new();
-            response.HasError = true;
+            response.HasError = false;
 
             ApplicationUser user = await _userManager.FindByIdAsync(request.Id);
 
