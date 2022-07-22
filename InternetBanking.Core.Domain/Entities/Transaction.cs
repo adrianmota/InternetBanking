@@ -15,12 +15,12 @@ namespace InternetBanking.Core.Domain.Entities
         public double Amount { get; set; }
 
         #region relations
-        public int ClientId { get; set; }
+        public string ClientId { get; set; }
         public int AccountFromId { get; set; } //The Account from the Transaction is made
         public int AccountToId { get; set; } //The Account which is going to receive the Transaction
 
         //Navigation props
-        public User Client { get; set; }
+        //public User Client { get; set; }
         public Product AccountFrom { get; set; }
         public Product AccountTo { get; set; }
         #endregion

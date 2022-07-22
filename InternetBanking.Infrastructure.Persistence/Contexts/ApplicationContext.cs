@@ -12,48 +12,39 @@ namespace InternetBanking.Infrastructure.Persistence.Contexts
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
 
-        public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Pay> Pays { get; set; }
+        public DbSet<Beneficiary> Beneficiaries { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             #region tables
-            builder.Entity<User>().ToTable("Users");
             builder.Entity<Product>().ToTable("Products");
             builder.Entity<Transaction>().ToTable("Transactions");
             builder.Entity<Pay>().ToTable("Pays");
+            builder.Entity<Beneficiary>().ToTable("Beneficiaries");
             #endregion
 
             #region keys
-            builder.Entity<User>().HasKey(t => t.Id);
             builder.Entity<Product>().HasKey(t => t.Id);
             builder.Entity<Transaction>().HasKey(t => t.Id);
             builder.Entity<Pay>().HasKey(t => t.Id);
+            builder.Entity<Beneficiary>().HasKey(t => new { t.ClientId, t.AccountId });
             #endregion
 
             #region relations
             //User-Products
-            builder.Entity<User>()
-                .HasMany<Product>(user => user.Products)
-                .WithOne(prod => prod.Client)
-                .HasForeignKey(prod => prod.ClientId)
-                .OnDelete(DeleteBehavior.Cascade);
+            //Weak relationship
+            //ForeignKey(Product.ClientId)
 
             //User-Pays (The Pays made by each user)
-            builder.Entity<User>()
-                .HasMany<Pay>(user => user.Pays)
-                .WithOne(pay => pay.Client)
-                .HasForeignKey(pay => pay.ClientId)
-                .OnDelete(DeleteBehavior.NoAction);
+            //Weak relationship
+            //ForeignKey(Pay.ClientId)
 
             //User-Transactions (The Transactions made by each User)
-            builder.Entity<User>()
-                .HasMany<Transaction>(user => user.Transactions)
-                .WithOne(tran => tran.Client)
-                .HasForeignKey(tran => tran.ClientId)
-                .OnDelete(DeleteBehavior.Cascade);
+            //Weak relationship
+            //ForeignKey(Transaction.ClientId)
 
             //Product-Pays(Out), this one for the Pays that came out from the Product/Account
             builder.Entity<Product>()
@@ -84,37 +75,27 @@ namespace InternetBanking.Infrastructure.Persistence.Contexts
                 .OnDelete(DeleteBehavior.NoAction);
 
             //Relation M-M between Clients and Accounts for Beneficiaries
-            builder.Entity<User>()
-                .HasMany(u => u.Beneficiaries)
-                .WithMany(b => b.Beneficiaries)
-                .UsingEntity<Beneficiary>(
-                    j => j
-                        .HasOne(ub => ub.Account)
-                        .WithMany(b => b.ClientBeneficiaries)
-                        .HasForeignKey(pc => pc.AccountId),
-                    j => j
-                        .HasOne(cb => cb.Client)
-                        .WithMany(c => c.ClientBeneficiaries)
-                        .HasForeignKey(cb => cb.ClientId),
-                    j =>
-                    {
-                        j.ToTable("Beneficiaries");
-                        j.HasKey(t => new { t.ClientId, t.AccountId });
-                    });
+            //Weak relationship
+            //Only relationship between Accounts-Beneficiaries
+            builder.Entity<Product>()
+                .HasMany<Beneficiary>(prod => prod.Beneficiaries)
+                .WithOne(ben => ben.Account)
+                .HasForeignKey(ben => ben.AccountId)
+                .OnDelete(DeleteBehavior.NoAction);
             #endregion
 
             #region props config
 
-            #region users
-            builder.Entity<User>().Property(t => t.Name).IsRequired();
-            builder.Entity<User>().Property(t => t.LastName).IsRequired();
-            builder.Entity<User>().Property(t => t.DNI).IsRequired();
-            builder.Entity<User>().Property(t => t.Email).IsRequired();
-            builder.Entity<User>().Property(t => t.Username).IsRequired();
-            builder.Entity<User>().Property(t => t.Password).IsRequired();
-            builder.Entity<User>().Property(t => t.Type).IsRequired();
-            builder.Entity<User>().Property(t => t.Active).IsRequired();
-            #endregion
+            //#region users
+            //builder.Entity<User>().Property(t => t.Name).IsRequired();
+            //builder.Entity<User>().Property(t => t.LastName).IsRequired();
+            //builder.Entity<User>().Property(t => t.DNI).IsRequired();
+            //builder.Entity<User>().Property(t => t.Email).IsRequired();
+            //builder.Entity<User>().Property(t => t.Username).IsRequired();
+            //builder.Entity<User>().Property(t => t.Password).IsRequired();
+            //builder.Entity<User>().Property(t => t.Type).IsRequired();
+            //builder.Entity<User>().Property(t => t.Active).IsRequired();
+            //#endregion
 
             #region products
             builder.Entity<Product>().Property(t => t.Type).IsRequired();

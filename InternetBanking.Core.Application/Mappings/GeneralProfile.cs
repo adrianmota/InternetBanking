@@ -23,14 +23,6 @@ namespace InternetBanking.Core.Application.Mappings
                 .ForMember(dest => dest.HasError, opt => opt.Ignore())
                 .ReverseMap();
 
-            CreateMap<User, UserViewModel>()
-                .ReverseMap()
-                .ForMember(d => d.Created, o => o.Ignore())
-                .ForMember(d => d.CreatedBy, o => o.Ignore())
-                .ForMember(d => d.Modified, o => o.Ignore())
-                .ForMember(d => d.ModifiedBy, o => o.Ignore())
-                .ForMember(d => d.ClientBeneficiaries, o => o.Ignore());
-
             CreateMap<Product, ProductViewModel>()
                 .ReverseMap()
                 .ForMember(d => d.Created, o => o.Ignore())
@@ -42,8 +34,7 @@ namespace InternetBanking.Core.Application.Mappings
                 .ForMember(d => d.PaysOut, o => o.Ignore())
                 .ForMember(d => d.TransactionsIn, o => o.Ignore())
                 .ForMember(d => d.TransactionsOut, o => o.Ignore())
-                .ForMember(d => d.Beneficiaries, o => o.Ignore())
-                .ForMember(d => d.ClientBeneficiaries, o => o.Ignore());
+                .ForMember(d => d.Beneficiaries, o => o.Ignore());
 
             CreateMap<Pay, PayViewModel>()
                 .ReverseMap()
