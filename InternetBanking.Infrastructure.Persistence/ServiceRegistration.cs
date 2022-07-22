@@ -24,7 +24,6 @@ namespace InternetBanking.Infrastructure.Persistence
             //dependency injections
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IProductRepository, ProductRepository>();
-            services.AddTransient<IPayRepository, PayRepository>();
             services.AddTransient<ITransactionRepository, TransactionRepository>();
             services.AddTransient<IBeneficiaryRepository, BeneficiaryRepository>();
         }

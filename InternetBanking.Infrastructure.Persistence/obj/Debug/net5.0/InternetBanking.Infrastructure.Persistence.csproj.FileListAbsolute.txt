@@ -1,8 +1,3 @@
-C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Infrastructure.Persistence\obj\Debug\net5.0\InternetBanking.Infrastructure.Persistence.csproj.AssemblyReference.cache
-C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Infrastructure.Persistence\obj\Debug\net5.0\InternetBanking.Infrastructure.Persistence.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Infrastructure.Persistence\obj\Debug\net5.0\InternetBanking.Infrastructure.Persistence.AssemblyInfoInputs.cache
-C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Infrastructure.Persistence\obj\Debug\net5.0\InternetBanking.Infrastructure.Persistence.AssemblyInfo.cs
-C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Infrastructure.Persistence\obj\Debug\net5.0\InternetBanking.Infrastructure.Persistence.csproj.CoreCompileInputs.cache
 C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Infrastructure.Persistence\bin\Debug\net5.0\InternetBanking.Infrastructure.Persistence.deps.json
 C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Infrastructure.Persistence\bin\Debug\net5.0\InternetBanking.Infrastructure.Persistence.dll
 C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Infrastructure.Persistence\bin\Debug\net5.0\InternetBanking.Infrastructure.Persistence.pdb
@@ -10,6 +5,11 @@ C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Infrastructure.Persis
 C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Infrastructure.Persistence\bin\Debug\net5.0\InternetBanking.Core.Domain.dll
 C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Infrastructure.Persistence\bin\Debug\net5.0\InternetBanking.Core.Application.pdb
 C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Infrastructure.Persistence\bin\Debug\net5.0\InternetBanking.Core.Domain.pdb
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Infrastructure.Persistence\obj\Debug\net5.0\InternetBanking.Infrastructure.Persistence.csproj.AssemblyReference.cache
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Infrastructure.Persistence\obj\Debug\net5.0\InternetBanking.Infrastructure.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Infrastructure.Persistence\obj\Debug\net5.0\InternetBanking.Infrastructure.Persistence.AssemblyInfoInputs.cache
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Infrastructure.Persistence\obj\Debug\net5.0\InternetBanking.Infrastructure.Persistence.AssemblyInfo.cs
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Infrastructure.Persistence\obj\Debug\net5.0\InternetBanking.Infrastructure.Persistence.csproj.CoreCompileInputs.cache
 C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Infrastructure.Persistence\obj\Debug\net5.0\InternetBanking.Infrastructure.Persistence.csproj.CopyComplete
 C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Infrastructure.Persistence\obj\Debug\net5.0\InternetBanking.Infrastructure.Persistence.dll
 C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Infrastructure.Persistence\obj\Debug\net5.0\refint\InternetBanking.Infrastructure.Persistence.dll

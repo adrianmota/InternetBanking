@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InternetBanking.Core.Domain.Entities
 {
-    public class Pay : AuditableBaseEntity
+    public class PayForDelete : AuditableBaseEntity
     {
         public int Type { get; set; } //For all types of Pays: Direct (see explanation below), CreditCard, Loan and ForBeneficiary
         public double Amount { get; set; }
