@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using InternetBanking.Core.Application.Interfaces.Repositories;
 using InternetBanking.Core.Application.Interfaces.Services;
+using InternetBanking.Core.Application.ViewModels.Admin;
 using InternetBanking.Core.Application.ViewModels.Role;
 using InternetBanking.Core.Application.ViewModels.User;
 using InternetBanking.Core.Domain.Entities;
@@ -51,6 +52,27 @@ namespace InternetBanking.Core.Application.Services
         {
             List<UserViewModel> viewModelList = await _accountService.GetAllUsers();
             return viewModelList;
+        }
+
+        public async Task<UsersListsViewModel> GetAllForAdministrateViewModel()
+        {
+            UsersListsViewModel usersLists = new();
+            usersLists.Clients = new();
+            usersLists.Admins = new();
+            List<UserViewModel> viewModelList = await _accountService.GetAllUsers();
+
+            foreach(UserViewModel user in viewModelList)
+            {
+                if(user.Role=="Admin")
+                    usersLists.Admins.Add(user);
+                else if(user.Role=="Client")
+                    usersLists.Clients.Add(user);
+            }
+
+            usersLists.NewAdmin = new();
+            usersLists.NewClient = new();
+
+            return usersLists;
         }
 
         public async Task<SaveUserViewModel> GetByIdSaveViewModel(string id)

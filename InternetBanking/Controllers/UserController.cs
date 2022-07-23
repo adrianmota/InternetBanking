@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using StockApp.Core.Application.Dtos.Account;
 using StockApp.Core.Application.Helpers;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using System.Linq;
 
 namespace WebApp.InternetBanking.Controllers
 {
@@ -39,7 +41,17 @@ namespace WebApp.InternetBanking.Controllers
             }
 
             HttpContext.Session.Set<AuthenticationResponse>("user", response);
-            return RedirectToRoute(new { controller = "Home", action = "Index" });
+
+            bool isAdmin = response != null ? response.Roles.Any(role => role == "Admin") : false;
+            bool isClient = response != null ? response.Roles.Any(role => role == "Client") : false;
+            string controller = "";
+
+            if (isAdmin)
+                controller = "Admin";
+            else if (isClient)
+                controller = "Home";
+
+            return RedirectToRoute(new { controller = controller, action = "Index" });
         }
 
         public IActionResult Create()
@@ -99,7 +111,7 @@ namespace WebApp.InternetBanking.Controllers
 
         public async Task<IActionResult> AdministrateUsers()
         {
-            return View(await _userService.GetAllViewModel());
+            return View(await _userService.GetAllForAdministrateViewModel());
         }
 
         public async Task<IActionResult> SetUserStatus(string id)

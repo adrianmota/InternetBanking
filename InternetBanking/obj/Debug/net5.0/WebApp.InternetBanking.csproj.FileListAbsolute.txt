@@ -912,3 +912,6 @@ C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\refin
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\WebApp.InternetBanking.pdb
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\WebApp.InternetBanking.genruntimeconfig.cache
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking\obj\Debug\net5.0\ref\WebApp.InternetBanking.dll
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Admin\Index.cshtml.g.cs
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Admin\AdministrateUsers.cshtml.g.cs
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\User\AdministrateUsers.old.cshtml.g.cs

@@ -1,4 +1,5 @@
-﻿using InternetBanking.Core.Application.ViewModels.Role;
+﻿using InternetBanking.Core.Application.ViewModels.Admin;
+using InternetBanking.Core.Application.ViewModels.Role;
 using InternetBanking.Core.Application.ViewModels.User;
 using InternetBanking.Core.Domain.Entities;
 using StockApp.Core.Application.Dtos.Account;
@@ -20,5 +21,6 @@ namespace InternetBanking.Core.Application.Interfaces.Services
         List<RoleViewModel> GetAllRoles();
         Task SetUserStatus(string id);
         Task LogOut();
+        Task<UsersListsViewModel> GetAllForAdministrateViewModel();
     }
 }
