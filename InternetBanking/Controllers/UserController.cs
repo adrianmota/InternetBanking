@@ -129,6 +129,11 @@ namespace WebApp.InternetBanking.Controllers
                 return View("SaveUser", saveViewModel);
             }
 
+            if (saveViewModel.Amount > 0)
+            {
+                await _productService.AddAmountToMainAccount(saveViewModel.Id, saveViewModel.Amount);
+            }
+
             return RedirectToRoute(new { controller = "User", action = "AdministrateUsers" });
         }
 

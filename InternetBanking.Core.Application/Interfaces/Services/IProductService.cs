@@ -11,5 +11,6 @@ namespace InternetBanking.Core.Application.Interfaces.Services
 {
     public interface IProductService : IGenericService<SaveProductViewModel, ProductViewModel, Product>
     {
+        Task AddAmountToMainAccount(string userId, double amount);
     }
 }

@@ -45,6 +45,8 @@ namespace InternetBanking.Core.Application.ViewModels.User
         [Required(ErrorMessage = "Debe colocar el tipo de usuario")]
         [DataType(DataType.Text)]
         public string Type { get; set; }
+
+        [DataType(DataType.Currency)]
         public double Amount { get; set; }
         public string Role { get; set; }
         public bool HasError { get; set; }

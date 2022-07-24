@@ -62,5 +62,13 @@ namespace InternetBanking.Core.Application.Services
 
             return await base.Add(vm);
         }
+
+        public async Task AddAmountToMainAccount(string userId, double amount)
+        {
+            List<Product> products = await _productRepository.GetAllAsync();
+            Product product = products.FirstOrDefault(p => p.ClientId == userId && p.Type == (int)ProductType.MainSavingAccount);
+            product.Amount += amount;
+            await _productRepository.UpdateAsync(product, product.Id);
+        }
     }
 }
