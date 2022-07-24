@@ -6,16 +6,20 @@ using StockApp.Core.Application.Helpers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System.Linq;
+using InternetBanking.Core.Application.ViewModels.Product;
+using InternetBanking.Core.Application.Enums;
 
 namespace WebApp.InternetBanking.Controllers
 {
     public class UserController : Controller
     {
         private readonly IUserService _userService;
+        private readonly IProductService _productService;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IProductService productService)
         {
             _userService = userService;
+            _productService = productService;
         }
 
         public IActionResult Index()
@@ -73,9 +77,28 @@ namespace WebApp.InternetBanking.Controllers
 
             if (response != null && response.HasError)
             {
+                ViewBag.Roles = _userService.GetAllRoles();
                 saveViewModel.HasError = response.HasError;
                 saveViewModel.Error = response.Error;
                 return View("SaveUser", saveViewModel);
+            }
+
+            if (saveViewModel.Type == Roles.Client.ToString())
+            {
+                SaveProductViewModel saveProduct = new()
+                {
+                    Amount = saveViewModel.Amount,
+                    Type = (int)ProductType.MainSavingAccount,
+                    ClientId = response.UserId
+                };
+
+                var productSaved = await _productService.Add(saveProduct);
+                if (productSaved == null)
+                {
+                    saveViewModel.HasError = true;
+                    saveViewModel.Error = $"Error occurred trying to create a main account for the user {saveViewModel.UserName}";
+                    return View("SaveUser", saveViewModel);
+                }
             }
 
             return RedirectToRoute(new { controller = "User", action = "AdministrateUsers" });

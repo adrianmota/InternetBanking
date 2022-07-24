@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using InternetBanking.Core.Application.Enums;
 using InternetBanking.Core.Application.Interfaces.Repositories;
 using InternetBanking.Core.Application.Interfaces.Services;
 using InternetBanking.Core.Application.ViewModels.Product;
@@ -21,6 +22,45 @@ namespace InternetBanking.Core.Application.Services
         {
             _productRepository = repository;
             _mapper = mapper;
+        }
+
+        public override async Task<ProductViewModel> Add(SaveProductViewModel vm)
+        {
+            int minValue=0, maxValue=0;
+            switch (vm.Type)
+            {
+                case (int)ProductType.MainSavingAccount:
+                    minValue = 100000000;
+                    maxValue = 199999999;
+                    break;
+
+                case (int)ProductType.SavingAccount:
+                    minValue = 200000000;
+                    maxValue = 399999999;
+                    break;
+
+                case (int)ProductType.CreditCard:
+                    minValue = 400000000;
+                    maxValue = 599999999;
+                    break;
+
+                case (int)ProductType.Loan:
+                    minValue = 600000000;
+                    maxValue = 799999999;
+                    break;
+            }
+
+            Random random = new();
+            bool idIsUsed;
+
+            do
+            {
+                vm.Id = random.Next(minValue, maxValue);
+                SaveProductViewModel saveProduct = await GetByIdSaveViewModel(vm.Id);
+                idIsUsed = saveProduct != null;
+            } while (idIsUsed);
+
+            return await base.Add(vm);
         }
     }
 }

@@ -165,7 +165,8 @@ namespace InternetBanking.Infrastructure.Identity.Services
                 Email = request.Email,
                 UserName = request.UserName,
                 FirstName = request.FirstName,
-                LastName = request.LastName
+                LastName = request.LastName,
+                DNI = request.DNI
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);
@@ -178,10 +179,17 @@ namespace InternetBanking.Infrastructure.Identity.Services
             {
                 response.HasError = true;
                 response.Error = $"An error occurred trying to register the user";
+                for(int i = 0; i < result.Errors.Count(); i++)
+                {
+                    response.Error += $"\n{result.Errors.ElementAt(i).Description}";
+                }
                 return response;
             }
 
-            return null;
+            return new RegisterResponse()
+            {
+                UserId = await _userManager.GetUserIdAsync(user)
+            };
         }
 
         public async Task<RegisterResponse> UpdateUserAsync(RegisterRequest request)

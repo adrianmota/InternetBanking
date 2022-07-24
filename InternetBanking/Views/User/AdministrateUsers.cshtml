@@ -72,9 +72,9 @@
                                     </td>
                                       <td>
                                         @if(client.IsActive){
-                                            <a class="btn btn-outline-danger" asp-controller="User" asp-action="SetUserStatus" asp-route-id="@client.Id">Desactivar</a>
+                                            <button class="btn btn-outline-danger" onclick="setUser('@client.Id')" data-bs-toggle="modal" data-bs-target="#modalDesactivar">Desactivar</button>
                                         }else{
-                                            <a class="btn btn-outline-success" asp-controller="User" asp-action="SetUserStatus" asp-route-id="@client.Id">Activar</a>
+                                            <button class="btn btn-outline-success" onclick="setUser('@client.Id')" data-bs-toggle="modal" data-bs-target="#modalActivar">Activar</button>
                                         }
                                         <a class="btn btn-outline-warning" asp-controller="User" asp-action="Edit" asp-route-id="@client.Id">Editar</a>
                                       </td>
@@ -138,11 +138,11 @@
                                         {
                                             @if (admin.IsActive)
                                             {
-                                                <a class="btn btn-outline-danger" asp-controller="User" asp-action="SetUserStatus" asp-route-id="@admin.Id">Desactivar</a>
+                                                <button class="btn btn-outline-danger" onclick="setUser('@admin.Id')" data-bs-toggle="modal" data-bs-target="#modalDesactivar">Desactivar</button>
                                             }
                                             else
                                             {
-                                                <a class="btn btn-outline-success" asp-controller="User" asp-action="SetUserStatus" asp-route-id="@admin.Id">Activar</a>
+                                                <button class="btn btn-outline-success" onclick="setUser('@admin.Id')" data-bs-toggle="modal" data-bs-target="#modalActivar">Activar</button>
                                             }
                                             <a class="btn btn-outline-warning" asp-controller="User" asp-action="Edit" asp-route-id="@admin.Id">Editar</a>
                                         }else{
@@ -174,41 +174,41 @@
 </div>
 
 
-<!--Modales para agregar usuarios-->
+<!--Modales-->
 
-<!-- Modal Clientes -->
-<div class="modal fade" id="agregarCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal Activar Usuario -->
+<div class="modal fade" id="modalActivar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Agregar Cliente</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Activar Usuario</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Cliente
+        ¿Esta seguro que desea activar este usuario?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button id="btnActiveUser" type="button" class="btn btn-primary">Activar</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Modal Administradores -->
-<div class="modal fade" id="agregarAdmin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal Desactivar Usuario -->
+<div class="modal fade" id="modalDesactivar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Agregar Administrador</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Desactivar Usuario</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Admin
+        ¿Esta seguro que desea desactivar este usuario?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button id="btnDeactiveUser" type="button" class="btn btn-danger">Desactivar</button>
       </div>
     </div>
   </div>
@@ -218,6 +218,8 @@
 
 
 <!------ Include the above in your HEAD tag ---------->
+
+<script type="text/javascript" src="~/js/AdminUser.js"></script>
         
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

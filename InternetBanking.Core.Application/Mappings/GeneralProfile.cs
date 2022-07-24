@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using InternetBanking.Core.Application.ViewModels.Beneficiary;
 using InternetBanking.Core.Application.ViewModels.Pay;
 using InternetBanking.Core.Application.ViewModels.Product;
 using InternetBanking.Core.Application.ViewModels.Transaction;
@@ -28,11 +29,34 @@ namespace InternetBanking.Core.Application.Mappings
                 .ForMember(d => d.Created, o => o.Ignore())
                 .ForMember(d => d.CreatedBy, o => o.Ignore())
                 .ForMember(d => d.Modified, o => o.Ignore())
+                .ForMember(d => d.ModifiedBy, o => o.Ignore());
+
+            CreateMap<Product, SaveProductViewModel>()
+                .ReverseMap()
+                .ForMember(d => d.Created, o => o.Ignore())
+                .ForMember(d => d.CreatedBy, o => o.Ignore())
+                .ForMember(d => d.Modified, o => o.Ignore())
                 .ForMember(d => d.ModifiedBy, o => o.Ignore())
-                .ForMember(d => d.ClientId, o => o.Ignore())
                 .ForMember(d => d.TransactionsIn, o => o.Ignore())
                 .ForMember(d => d.TransactionsOut, o => o.Ignore())
                 .ForMember(d => d.Beneficiaries, o => o.Ignore());
+
+            CreateMap<Beneficiary, BeneficiaryViewModel>()
+                .ReverseMap()
+                .ForMember(d => d.Id, o => o.Ignore())
+                .ForMember(d => d.Created, o => o.Ignore())
+                .ForMember(d => d.CreatedBy, o => o.Ignore())
+                .ForMember(d => d.Modified, o => o.Ignore())
+                .ForMember(d => d.ModifiedBy, o => o.Ignore());
+
+            CreateMap<Beneficiary, SaveBeneficiaryViewModel>()
+                .ReverseMap()
+                .ForMember(d => d.Id, o => o.Ignore())
+                .ForMember(d => d.Created, o => o.Ignore())
+                .ForMember(d => d.CreatedBy, o => o.Ignore())
+                .ForMember(d => d.Modified, o => o.Ignore())
+                .ForMember(d => d.ModifiedBy, o => o.Ignore())
+                .ForMember(d => d.Account, o => o.Ignore());
 
             CreateMap<Transaction, TransactionViewModel>()
                 .ReverseMap()

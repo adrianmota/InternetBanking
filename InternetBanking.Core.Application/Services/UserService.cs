@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using InternetBanking.Core.Application.Enums;
 using InternetBanking.Core.Application.Interfaces.Repositories;
 using InternetBanking.Core.Application.Interfaces.Services;
 using InternetBanking.Core.Application.ViewModels.Admin;
@@ -37,7 +38,22 @@ namespace InternetBanking.Core.Application.Services
         public async Task<RegisterResponse> Add(SaveUserViewModel saveViewModel)
         {
             RegisterRequest request = _mapper.Map<RegisterRequest>(saveViewModel);
-            RegisterResponse response = await _accountService.RegisterAdminUserAsync(request);
+            RegisterResponse response;
+
+            if (saveViewModel.Type == Roles.Admin.ToString())
+                response = await _accountService.RegisterAdminUserAsync(request);
+            else if (saveViewModel.Type == Roles.Client.ToString())
+            {
+                response = await _accountService.RegisterClientUserAsync(request);
+            }
+            else
+            {
+                response = new()
+                {
+                    HasError = true,
+                    Error = "Error, user type not recognized"
+                };
+            }
             return response;
         }
 
