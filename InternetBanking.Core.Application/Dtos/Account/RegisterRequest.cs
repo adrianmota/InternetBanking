@@ -14,6 +14,7 @@ namespace StockApp.Core.Application.Dtos.Account
         public string DNI { get; set; }
         public string Email { get; set; }
         public string UserName { get; set; }
+        public string CurrentPassword { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
         public string Type { get; set; }

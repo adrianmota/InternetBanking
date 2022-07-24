@@ -235,11 +235,11 @@ namespace InternetBanking.Infrastructure.Identity.Services
             user.UserName = request.UserName;
             user.Email = request.Email;
             user.DNI = request.DNI;
-            user.PasswordHash = request.Password;
 
             var result = await _userManager.UpdateAsync(user);
+            var passResult = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.Password);
 
-            if (!result.Succeeded)
+            if (!result.Succeeded || !passResult.Succeeded)
             {
                 response.HasError = true;
                 response.Error = "An error occurred during the update of the user";

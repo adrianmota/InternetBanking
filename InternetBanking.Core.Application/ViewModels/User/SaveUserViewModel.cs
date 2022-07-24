@@ -31,6 +31,8 @@ namespace InternetBanking.Core.Application.ViewModels.User
         [DataType(DataType.Text)]
         public string UserName { get; set; }
 
+        public string CurrentPassword { get; set; }
+
         [Required(ErrorMessage = "Debe colocar la contraseña")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
