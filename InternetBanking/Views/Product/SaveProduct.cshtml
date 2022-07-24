@@ -1,0 +1,49 @@
+﻿@using InternetBanking.Core.Application.ViewModels.Product
+@using InternetBanking.Core.Application.ViewModels.Role
+@model SaveProductViewModel
+@{
+    bool editMode = (Model.Id != 0) ? true : false;
+    string title = editMode ? "Editar producto" : "Crear producto";
+    string actionMethod = editMode ? "Edit" : "Add";
+    ViewData["Title"] = title;
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="text-center">@title</h4>
+                </div>
+                <div class="card-body">
+                    @Html.ValidationSummary(false, "", new {@class = "text-danger"})
+                    <form method="post" asp-controller="Product" asp-action="@actionMethod">
+                        <div class="mb-3">
+                            <label for="user-type-form-field" asp-for="Type" class="form-label">Tipo de producto</label>
+                                <select id="user-type-form-field" asp-for="Type" class="form-select">
+                                    <option>Seleccione una opción</option>
+                                    <option value="2">Cuenta de ahorros</option>
+                                    <option value="3">Tarjeta de credito</option>
+                                    <option value="4">Prestamo</option>
+                                </select>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Amount" class="form-label">Monto</label>
+                            <input asp-for="Amount" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Limit" class="form-label">Limite</label>
+                            <input asp-for="Limit" class="form-control" />
+                        </div>
+
+                            <input asp-for="ClientId" hidden/>
+                        
+
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <a class="btn btn-secondary" asp-controller="Product" asp-action="Index" asp-route-userId="@Model.ClientId">Volver atrás</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

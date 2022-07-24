@@ -70,5 +70,11 @@ namespace InternetBanking.Core.Application.Services
             product.Amount += amount;
             await _productRepository.UpdateAsync(product, product.Id);
         }
+
+        public async Task<List<ProductViewModel>> GetProductsByUserId(string userId)
+        {
+            List<Product> products = await _productRepository.GetAllAsync();
+            return _mapper.Map<List<ProductViewModel>>(products.FindAll(p => p.ClientId == userId));
+        }
     }
 }

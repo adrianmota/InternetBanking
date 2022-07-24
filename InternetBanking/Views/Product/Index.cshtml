@@ -1,0 +1,101 @@
+﻿@using InternetBanking.Core.Application.Enums
+@using InternetBanking.Core.Application.ViewModels.User
+@model UserViewModel
+@{
+    ViewData["Title"] = "Productos";
+}
+<div class="row mb-4">
+    <div class="col-md-3">
+        <h2>Productos</h2>
+        <a class="btn btn-outline-warning" asp-controller="User" asp-action="AdministrateUsers">Volver</a>
+        <a class="btn btn-outline-success" asp-controller="Product" asp-action="Add" asp-route-userId="@Model.Id">Agregar Producto</a>
+    </div>
+
+    <div class="col-md-3 offset-5">
+        <div class="card">
+          <h4 class="card-header">Usuario</h4>
+          <div class="card-body">
+            <h5 class="card-title">@Model.FirstName @Model.LastName</h5>
+            <p class="card-text">@Model.DNI<br />
+                @Model.Email<br />
+                @Model.UserName</p>
+          </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-10 offset-1">
+        <div class="card">
+          <h5 class="card-header">Productos</h5>
+          <div class="card-body">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Codigo</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Monto</th>
+                    <th scope="col">Limite</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                @if (Model.Products.Count == 0)
+                {
+                    <tr>
+                        <td colspan="6">No hay productos agregados a la base de datos</td>
+                    </tr>
+                }else{
+                    @foreach (var product in Model.Products)
+                    {
+                            string tipo="";
+                            switch (product.Type)
+                            {
+                                case (int)ProductType.MainSavingAccount:
+                                    tipo = "Cuenta Principal";
+                                    break;
+
+                                    case (int)ProductType.SavingAccount:
+                                    tipo = "Cuenta de aghorros";
+                                    break;
+
+                                    case (int)ProductType.Loan:
+                                    tipo = "Prestamo";
+                                    break;
+
+                                    case (int)ProductType.CreditCard:
+                                    tipo = "Tarjeta de credito";
+                                    break;
+                            }
+                            <tr>
+                            <td>@product.Id</td>
+                            <td>@tipo</td>
+                            <td>@product.Amount</td>
+                            <td>@product.Limit</td>
+                            <td>
+                                @if(product.Type!=(int)ProductType.MainSavingAccount){
+                                    <a class="btn btn-outline-warning" asp-controller="Product" asp-action="Remove" asp-route-id="@product.Id">Eliminar</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                                
+                @*<tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>noc</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td colspan="2">Larry the Bird</td>
+                    <td>aja</td>
+                </tr>*@
+                </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+</div>
