@@ -1,16 +1,47 @@
-﻿using InternetBanking.Core.Domain.Entities;
+﻿using InternetBanking.Core.Domain.Common;
+using InternetBanking.Core.Domain.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using StockApp.Core.Application.Dtos.Account;
+using StockApp.Core.Application.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace InternetBanking.Infrastructure.Persistence.Contexts
 {
     public class ApplicationContext:DbContext
     {
-        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
+        private readonly IHttpContextAccessor _httpContext;
+
+        public ApplicationContext(DbContextOptions<ApplicationContext> options, IHttpContextAccessor httpContext) : base(options)
+        { 
+            _httpContext = httpContext;
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            foreach (var entry in ChangeTracker.Entries<AuditableBaseEntity>())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.Entity.Created = DateTime.Now;
+                        entry.Entity.CreatedBy = _httpContext.HttpContext.Session.Get<AuthenticationResponse>("user") == null ? "DefaultUser" : _httpContext.HttpContext.Session.Get<AuthenticationResponse>("user").Username;
+                        break;
+
+                    case EntityState.Modified:
+                        entry.Entity.Modified = DateTime.Now;
+                        entry.Entity.ModifiedBy = _httpContext.HttpContext.Session.Get<AuthenticationResponse>("user") == null ? "DefaultUser" : _httpContext.HttpContext.Session.Get<AuthenticationResponse>("user").Username;
+                        break;
+                }
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
+        }
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Transaction> Transactions { get; set; }

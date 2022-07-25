@@ -22,5 +22,17 @@ namespace InternetBanking.Core.Application.Services
             _transactionRepository = repository;
             _mapper = mapper;
         }
+
+        public async Task<List<TransactionViewModel>> GetTodayTransactions()
+        {
+            int today = DateTime.Now.Day;
+            var transactions = await _transactionRepository.GetAllAsync();
+
+            List<Transaction> todayTransactions = transactions.FindAll(t => t.Created.Day == today);
+            List<TransactionViewModel> todayVM = _mapper.Map<List<TransactionViewModel>>(todayTransactions);
+
+            return todayVM;
+        }
+
     }
 }

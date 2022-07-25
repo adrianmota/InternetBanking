@@ -11,5 +11,6 @@ namespace InternetBanking.Core.Application.Interfaces.Services
 {
     public interface ITransactionService : IGenericService<SaveTransactionViewModel, TransactionViewModel, Transaction>
     {
+        Task<List<TransactionViewModel>> GetTodayTransactions();
     }
 }

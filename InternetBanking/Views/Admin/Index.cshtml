@@ -1,9 +1,10 @@
-﻿
+﻿@using InternetBanking.Core.Application.ViewModels.Admin
+@model DashboardViewModel
 @{
     ViewData["Title"] = "Dashboard";
 }
 <div class="row mb-4">
-    <h1>Dashboard</h1>
+    <h2>Dashboard</h2>
 </div>
 
 
@@ -16,11 +17,11 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
                 <h6>Hoy</h6>
-                <p>13 transacciones<br />$1,346.76</p>
+                <p>@Model.TodayTransactions transacciones<br />$@Model.TodayTransactionsAmount</p>
             </li>
             <li class="list-group-item">
                 <h6>Total</h6>
-                <p>154 transacciones en total<br />$93,783.34</p>
+                <p>@Model.TotalTransactions transacciones<br />$@Model.TotalTransactionsAmount</p>
             </li>
           </ul>
         </div>
@@ -34,11 +35,11 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
                 <h6>Hoy</h6>
-                <p>13 pagos<br />$1,346.76</p>
+                <p>@Model.TodayPays transacciones<br />$@Model.TodayPaysAmount</p>
             </li>
             <li class="list-group-item">
                 <h6>Total</h6>
-                <p>154 pagos en total<br />$93,783.34</p>
+                <p>@Model.TotalPays transacciones<br />$@Model.TotalPaysAmount</p>
             </li>
           </ul>
         </div>
@@ -52,15 +53,15 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
                 <h6>Activos</h6>
-                <p>134</p>
+                <p>@Model.ActiveUsers</p>
             </li>
             <li class="list-group-item">
                 <h6>Inactivos</h6>
-                <p>25</p>
+                <p>@Model.InactiveUsers</p>
             </li>
             <li class="list-group-item">
                 <h6>Productos asignados</h6>
-                <p>209</p>
+                <p>@Model.ProductsCount</p>
             </li>
           </ul>
         </div>
