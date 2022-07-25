@@ -896,6 +896,7 @@ C:\Users\Joel\source\repos\InternetBanking\InternetBanking\obj\Debug\net5.0\Razo
 C:\Users\Joel\source\repos\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Home\LoanPay.cshtml.g.cs
 C:\Users\Joel\source\repos\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Home\MoneyAdvance.cshtml.g.cs
 C:\Users\Joel\source\repos\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Home\Transaction.cshtml.g.cs
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Product\Delete.cshtml.g.cs
 C:\Users\Joel\source\repos\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Product\Index.cshtml.g.cs
 C:\Users\Joel\source\repos\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Product\SaveProduct.cshtml.g.cs
 C:\Users\Joel\source\repos\InternetBanking\InternetBanking\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs

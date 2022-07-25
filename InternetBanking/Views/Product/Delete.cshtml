@@ -1,0 +1,77 @@
+﻿@using InternetBanking.Core.Application.ViewModels.Product
+@using InternetBanking.Core.Application.ViewModels.Role
+@using InternetBanking.Core.Application.Enums
+@model SaveProductViewModel
+@{
+    string type = "";
+
+    switch (Model.Type)
+    {
+        case (int)ProductType.SavingAccount:
+            type = "Cuenta de Ahorros";
+            break;
+
+        case (int)ProductType.CreditCard:
+            type = "Tarjeta de Credito";
+            break;
+
+        case (int)ProductType.Loan:
+            type = "Prestamo";
+            break;
+    }
+    ViewData["Title"] = $"Eliminar {type}";
+
+    bool cantDelete = ViewBag.Blocked != null;
+}
+
+<div class="row">
+    <div>
+        <div class="card">
+          <h5 class="card-header">Eliminar @type</h5>
+          <div class="card-body">
+            @if(cantDelete){
+                @switch (Model.Type)
+                {
+                    case (int)ProductType.CreditCard:
+                        <h5 class="card-title">No se puede eliminar la @type @Model.Id</h5>
+                        <p class="card-text">El usuario no ha terminado de pagar la deuda actual de esta tarjeta, por tanto, no se le puede retirar</p>
+                        break;
+
+                    case (int)ProductType.Loan:
+                        <h5 class="card-title">No se puede eliminar el @type @Model.Id</h5>
+                        <p class="card-text">El usuario no ha terminado de pagar la deuda referente a este prestamo, por tanto, aun no se puede eliminar</p>
+                        break;
+                }
+            }else{
+                @switch (Model.Type)
+                {
+                    case (int)ProductType.SavingAccount:
+                        <h5 class="card-title">¿Estas seguro que quieres eliminar la @type @Model.Id?</h5>
+                        <p class="card-text">El monto de esta cuenta ($@Model.Amount) se sumara a la cuenta principal del usuario al borrarse</p>
+                        break;
+
+                    case (int)ProductType.CreditCard:
+                        <h5 class="card-title">¿Estas seguro que quieres eliminar la @type @Model.Id?</h5>
+                        <p class="card-text">El usuario no podra volver a efectuar avances de efectivo de esta tarjeta</p>
+                        break;
+
+                    case (int)ProductType.Loan:
+                        <h5 class="card-title">¿Estas seguro que quieres eliminar el @type @Model.Id?</h5>
+                        <p class="card-text">El usuario ya termino de pagar este prestamo, se puede eliminar sin problemas</p>
+                        break;
+                }
+            
+            <form method="post" asp-action="Delete" asp-controller="Product">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="Amount" />
+                <input type="hidden" asp-for="Limit" />
+                <input type="hidden" asp-for="ClientId" />
+                <input type="hidden" asp-for="Type" />
+                <button type="submit" class="btn btn-danger">Borrar</button>
+            </form>
+            }
+            <a class="btn btn-secondary" asp-action="Index" asp-controller="Product" asp-route-userId="@Model.ClientId">Volver</a>
+          </div>
+        </div>
+    </div>
+</div>

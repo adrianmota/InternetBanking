@@ -1,5 +1,6 @@
 ﻿@using InternetBanking.Core.Application.ViewModels.Product
 @using InternetBanking.Core.Application.ViewModels.Role
+@using InternetBanking.Core.Application.Enums
 @model SaveProductViewModel
 @{
     bool editMode = (Model.Id != 0) ? true : false;
@@ -18,22 +19,25 @@
                 <div class="card-body">
                     @Html.ValidationSummary(false, "", new {@class = "text-danger"})
                     <form method="post" asp-controller="Product" asp-action="@actionMethod">
-                        <div class="mb-3">
-                            <label for="user-type-form-field" asp-for="Type" class="form-label">Tipo de producto</label>
-                                <select id="user-type-form-field" asp-for="Type" class="form-select">
+                        @if (!editMode)
+                        {
+                            <div class="mb-3">
+                                <label for="product-type-select" asp-for="Type" class="form-label">Tipo de producto</label>
+                                <select id="product-type-select" asp-for="Type" class="form-select">
                                     <option>Seleccione una opción</option>
-                                    <option value="2">Cuenta de ahorros</option>
-                                    <option value="3">Tarjeta de credito</option>
-                                    <option value="4">Prestamo</option>
+                                    <option value="@((int)ProductType.SavingAccount)">Cuenta de ahorros</option>
+                                    <option value="@((int)ProductType.CreditCard)">Tarjeta de credito</option>
+                                    <option value="@((int)ProductType.Loan)">Prestamo</option>
                                 </select>
-                        </div>
-                        <div class="mb-3">
+                            </div>
+                        }
+                        <div class="mb-3" id="amount-input">
                             <label asp-for="Amount" class="form-label">Monto</label>
-                            <input asp-for="Amount" class="form-control" />
+                            <input type="number" step="any" asp-for="Amount" class="form-control" />
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3" id="limit-input" hidden>
                             <label asp-for="Limit" class="form-label">Limite</label>
-                            <input asp-for="Limit" class="form-control" />
+                            <input type="number" step="any" asp-for="Limit" class="form-control" />
                         </div>
 
                             <input asp-for="ClientId" hidden/>
@@ -47,3 +51,5 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="~/js/SaveProduct.js"></script>
