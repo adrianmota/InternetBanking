@@ -4,6 +4,7 @@ using InternetBanking.Core.Application.Interfaces.Services;
 using InternetBanking.Core.Application.ViewModels.Product;
 using InternetBanking.Core.Application.ViewModels.User;
 using Microsoft.AspNetCore.Mvc;
+using StockApp.Core.Application.Dtos.Account;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

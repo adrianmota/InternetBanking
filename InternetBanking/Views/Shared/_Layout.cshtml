@@ -41,8 +41,16 @@
 
                             @if (isClient)
                             {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" href="#">Pagos</a>
+                                <li class="nav-item dropdown">
+                                  <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Pagos
+                                  </a>
+                                  <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-action="ExpressPay" asp-controller="Home">Expresos</a></li>
+                                    <li><a class="dropdown-item" asp-action="CreditCardPay" asp-controller="Home">Tarjeta de credito</a></li>
+                                    <li><a class="dropdown-item" asp-action="LoanPay" asp-controller="Home">Prestamo</a></li>
+                                    <li><a class="dropdown-item" asp-action="ForBeneficiaryPay" asp-controller="Home">Beneficiarios</a></li>
+                                  </ul>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-controller="Home" asp-action="Beneficiaries">Beneficiarios</a>
