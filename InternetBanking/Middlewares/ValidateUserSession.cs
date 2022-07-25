@@ -6,11 +6,16 @@ namespace WebApp.InternetBanking.Middlewares
 {
     public class ValidateUserSession
     {
-        private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly IHttpContextAccessor _httpContext;
+
+        public ValidateUserSession(IHttpContextAccessor httpContext)
+        {
+            _httpContext = httpContext;
+        }
 
         public bool HasUser()
         {
-            var user = httpContextAccessor.HttpContext.Session.Get<AuthenticationResponse>("user");
+            var user = _httpContext.HttpContext.Session.Get<AuthenticationResponse>("user");
 
             if (user != null)
             {

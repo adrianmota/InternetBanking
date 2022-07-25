@@ -8181,19 +8181,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\LENOVO\\.nuget\\packages\\": {}
+    "C:\\Users\\Joel\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking\\WebApp.InternetBanking.csproj",
+      "projectUniqueName": "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking\\WebApp.InternetBanking.csproj",
       "projectName": "WebApp.InternetBanking",
-      "projectPath": "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking\\WebApp.InternetBanking.csproj",
-      "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking\\obj\\",
+      "projectPath": "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking\\WebApp.InternetBanking.csproj",
+      "packagesPath": "C:\\Users\\Joel\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Joel\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8207,17 +8207,17 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking.Core.Application\\InternetBanking.Core.Application.csproj": {
-              "projectPath": "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking.Core.Application\\InternetBanking.Core.Application.csproj"
+            "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Core.Application\\InternetBanking.Core.Application.csproj": {
+              "projectPath": "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Core.Application\\InternetBanking.Core.Application.csproj"
             },
-            "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking.Infrastructure.Identity\\InternetBanking.Infrastructure.Identity.csproj": {
-              "projectPath": "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking.Infrastructure.Identity\\InternetBanking.Infrastructure.Identity.csproj"
+            "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Infrastructure.Identity\\InternetBanking.Infrastructure.Identity.csproj": {
+              "projectPath": "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Infrastructure.Identity\\InternetBanking.Infrastructure.Identity.csproj"
             },
-            "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking.Infrastructure.Persistence\\InternetBanking.Infrastructure.Persistence.csproj": {
-              "projectPath": "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking.Infrastructure.Persistence\\InternetBanking.Infrastructure.Persistence.csproj"
+            "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Infrastructure.Persistence\\InternetBanking.Infrastructure.Persistence.csproj": {
+              "projectPath": "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Infrastructure.Persistence\\InternetBanking.Infrastructure.Persistence.csproj"
             },
-            "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking.Infrastructure.Shared\\InternetBanking.Infrastructure.Shared.csproj": {
-              "projectPath": "C:\\Users\\LENOVO\\workspace\\InternetBanking\\InternetBanking.Infrastructure.Shared\\InternetBanking.Infrastructure.Shared.csproj"
+            "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Infrastructure.Shared\\InternetBanking.Infrastructure.Shared.csproj": {
+              "projectPath": "C:\\Users\\Joel\\source\\repos\\InternetBanking\\InternetBanking.Infrastructure.Shared\\InternetBanking.Infrastructure.Shared.csproj"
             }
           }
         }
@@ -8265,7 +8265,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

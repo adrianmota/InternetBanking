@@ -31,7 +31,7 @@ namespace InternetBanking
                     await DefaultRoles.SeedAsync(userManager, roleManager);
                     await DefaultAdminUser.SeedAsync(userManager, roleManager);
                 }
-                catch (Exception e) { }
+                catch (Exception ex) { }
             }
 
             host.Run();
