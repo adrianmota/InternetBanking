@@ -12,12 +12,10 @@
     <div class="col-md-4">
         <h2>Administrar Usuarios</h2>
     </div>
-
     <div class="col-md-3 offset-5">
         <a class="btn btn-outline-primary" asp-controller="User" asp-action="Create">Crear Usuario</a>
     </div>
 </div>
-
 
 <div class="row">
     <div>
@@ -37,134 +35,146 @@
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="clients" role="tabpanel" aria-labelledby="clients-tab">
                         <table class="table table-striped table-hover">
-                          <thead>
-                            <tr>
-                              <th scope="col">Nombre</th>
-                              <th scope="col">Apellido</th>
-                              <th scope="col">Email</th>
-                              <th scope="col">Usuario</th>
-                              <th scope="col">Estado</th>
-                              <th scope="col">Acciones</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            @if (Model.Clients.Count == 0)
-                            {
+                            <thead>
                                 <tr>
-                                    <td colspan="6">No hay clientes agregados a la base de datos</td>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Apellido</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Usuario</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Acciones</th>
                                 </tr>
-                            }else{
-                                @foreach (var client in Model.Clients)
+                            </thead>
+                            <tbody>
+                                @if (Model.Clients.Count == 0)
                                 {
-                                    string trClass = !client.IsActive ? "table-warning" : "";
-                                    <tr class="@trClass">
-                                      <td>@client.FirstName</td>
-                                      <td>@client.LastName</td>
-                                      <td>@client.Email</td>
-                                      <td>@client.UserName</td>
-                                      <td>
-                                        @if (client.IsActive)
-                                        {
-                                            <p>Activo</p>
-                                        }else{
-                                            <p>Inactivo</p>
-                                        }
-                                    </td>
-                                      <td>
-                                        @if(client.IsActive){
-                                            <button class="btn btn-outline-danger" onclick="setUser('@client.Id')" data-bs-toggle="modal" data-bs-target="#modalDesactivar">Desactivar</button>
-                                        }else{
-                                            <button class="btn btn-outline-success" onclick="setUser('@client.Id')" data-bs-toggle="modal" data-bs-target="#modalActivar">Activar</button>
-                                        }
-                                        <a class="btn btn-outline-warning" asp-controller="User" asp-action="Edit" asp-route-id="@client.Id">Editar</a>
-                                        <a class="btn btn-outline-primary" asp-controller="Product" asp-action="Index" asp-route-userId="@client.Id">Ver Productos</a>
-                                      </td>
+                                    <tr>
+                                        <td colspan="6">No hay clientes agregados a la base de datos</td>
                                     </tr>
                                 }
-                            }
-                                
-                            @*<tr>
-                              <th scope="row">2</th>
-                              <td>Jacob</td>
-                              <td>Thornton</td>
-                              <td>noc</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">3</th>
-                              <td colspan="2">Larry the Bird</td>
-                              <td>aja</td>
-                            </tr>*@
-                          </tbody>
+                                else
+                                {
+                                    @foreach (var client in Model.Clients)
+                                    {
+                                        string trClass = !client.IsActive ? "table-warning" : "";
+                                        <tr class="@trClass">
+                                            <td>@client.FirstName</td>
+                                            <td>@client.LastName</td>
+                                            <td>@client.Email</td>
+                                            <td>@client.UserName</td>
+                                            <td>
+                                                @if (client.IsActive)
+                                                {
+                                                    <p>Activo</p>
+                                                }
+                                                else
+                                                {
+                                                    <p>Inactivo</p>
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (client.IsActive)
+                                                {
+                                                    <button class="btn btn-outline-danger" onclick="setUser('@client.Id')" data-bs-toggle="modal" data-bs-target="#modalDesactivar">Desactivar</button>
+                                                }
+                                                else
+                                                {
+                                                    <button class="btn btn-outline-success" onclick="setUser('@client.Id')" data-bs-toggle="modal" data-bs-target="#modalActivar">Activar</button>
+                                                }
+                                                <a class="btn btn-outline-warning" asp-controller="User" asp-action="Edit" asp-route-id="@client.Id">Editar</a>
+                                                <a class="btn btn-outline-primary" asp-controller="Product" asp-action="Index" asp-route-userId="@client.Id">Ver Productos</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+
+                                @*<tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>noc</td>
+                                </tr>
+                                <tr>
+                                <th scope="row">3</th>
+                                <td colspan="2">Larry the Bird</td>
+                                <td>aja</td>
+                                </tr>*@
+                            </tbody>
                         </table>
                     </div>
 
-
                     <div class="tab-pane fade" id="admins" role="tabpanel" aria-labelledby="admins-tab">
                         <table class="table table-striped table-hover">
-                          <thead>
-                            <tr>
-                              <th scope="col">Nombre</th>
-                              <th scope="col">Apellido</th>
-                              <th scope="col">Email</th>
-                              <th scope="col">Usuario</th>
-                              <th scope="col">Estado</th>
-                              <th scope="col">Acciones</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                              @if (Model.Admins.Count == 0)
-                            {
+                            <thead>
                                 <tr>
-                                    <td colspan="6">No hay administradores agregados a la base de datos</td>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Apellido</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Usuario</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Acciones</th>
                                 </tr>
-                            }else{
-                                @foreach (var admin in Model.Admins)
+                            </thead>
+                            <tbody>
+                                @if (Model.Admins.Count == 0)
                                 {
-                                    string trClass = !admin.IsActive ? "table-warning" : "";
-                                    <tr class="@trClass">
-                                      <td>@admin.FirstName</td>
-                                      <td>@admin.LastName</td>
-                                      <td>@admin.Email</td>
-                                      <td>@admin.UserName</td>
-                                      <td>
-                                        @if (admin.IsActive)
-                                        {
-                                            <p>Activo</p>
-                                        }else{
-                                            <p>Inactivo</p>
-                                        }
-                                    </td>
-                                      <td>
-                                        @if (admin.Id != currentUserLogged.Id)
-                                        {
-                                            @if (admin.IsActive)
-                                            {
-                                                <button class="btn btn-outline-danger" onclick="setUser('@admin.Id')" data-bs-toggle="modal" data-bs-target="#modalDesactivar">Desactivar</button>
-                                            }
-                                            else
-                                            {
-                                                <button class="btn btn-outline-success" onclick="setUser('@admin.Id')" data-bs-toggle="modal" data-bs-target="#modalActivar">Activar</button>
-                                            }
-                                            <a class="btn btn-outline-warning" asp-controller="User" asp-action="Edit" asp-route-id="@admin.Id">Editar</a>
-                                        }else{
-                                            <p>No puedes modificar tu propio usuario</p>
-                                        }
-                                    </td>
+                                    <tr>
+                                        <td colspan="6">No hay administradores agregados a la base de datos</td>
                                     </tr>
                                 }
-                            }
-                            @*<tr>
-                              <th scope="row">2</th>
-                              <td>Jacob</td>
-                              <td>Thornton</td>
-                              <td>noc</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">3</th>
-                              <td colspan="2">Larry the Bird</td>
-                              <td>aja</td>
-                            </tr>*@
-                          </tbody>
+                                else
+                                {
+                                    @foreach (var admin in Model.Admins)
+                                    {
+                                        string trClass = !admin.IsActive ? "table-warning" : "";
+                                        <tr class="@trClass">
+                                            <td>@admin.FirstName</td>
+                                            <td>@admin.LastName</td>
+                                            <td>@admin.Email</td>
+                                            <td>@admin.UserName</td>
+                                            <td>
+                                                @if (admin.IsActive)
+                                                {
+                                                    <p>Activo</p>
+                                                }
+                                                else
+                                                {
+                                                    <p>Inactivo</p>
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (admin.Id != currentUserLogged.Id)
+                                                {
+                                                    @if (admin.IsActive)
+                                                    {
+                                                        <button class="btn btn-outline-danger" onclick="setUser('@admin.Id')" data-bs-toggle="modal" data-bs-target="#modalDesactivar">Desactivar</button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button class="btn btn-outline-success" onclick="setUser('@admin.Id')" data-bs-toggle="modal" data-bs-target="#modalActivar">Activar</button>
+                                                    }
+                                                    <a class="btn btn-outline-warning" asp-controller="User" asp-action="Edit" asp-route-id="@admin.Id">Editar</a>
+                                                }
+                                                else
+                                                {
+                                                    <p>No puedes modificar tu propio usuario</p>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                @*<tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>noc</td>
+                                </tr>
+                                <tr>
+                                <th scope="row">3</th>
+                                <td colspan="2">Larry the Bird</td>
+                                <td>aja</td>
+                                </tr>*@
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -174,57 +184,47 @@
     </div>
 </div>
 
-
 <!--Modales-->
-
 <!-- Modal Activar Usuario -->
 <div class="modal fade" id="modalActivar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Activar Usuario</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ¿Esta seguro que desea activar este usuario?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button id="btnActiveUser" type="button" class="btn btn-primary">Activar</button>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Activar Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Esta seguro que desea activar este usuario?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="btnActiveUser" type="button" class="btn btn-primary">Activar</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- Modal Desactivar Usuario -->
 <div class="modal fade" id="modalDesactivar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Desactivar Usuario</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ¿Esta seguro que desea desactivar este usuario?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button id="btnDeactiveUser" type="button" class="btn btn-danger">Desactivar</button>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Desactivar Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Esta seguro que desea desactivar este usuario?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="btnDeactiveUser" type="button" class="btn btn-danger">Desactivar</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
-
-
-
 <!------ Include the above in your HEAD tag ---------->
-
 <script type="text/javascript" src="~/js/AdminUser.js"></script>
-        
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

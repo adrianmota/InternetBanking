@@ -1,3 +1,21 @@
+<<<<<<< HEAD
+=======
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Core.Application\bin\Debug\net5.0\InternetBanking.Core.Application.deps.json
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Core.Application\bin\Debug\net5.0\InternetBanking.Core.Application.dll
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Core.Application\bin\Debug\net5.0\InternetBanking.Core.Application.pdb
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Core.Application\bin\Debug\net5.0\InternetBanking.Core.Domain.dll
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Core.Application\bin\Debug\net5.0\InternetBanking.Core.Domain.pdb
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Core.Application\obj\Debug\net5.0\InternetBanking.Core.Application.csproj.AssemblyReference.cache
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Core.Application\obj\Debug\net5.0\InternetBanking.Core.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Core.Application\obj\Debug\net5.0\InternetBanking.Core.Application.AssemblyInfoInputs.cache
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Core.Application\obj\Debug\net5.0\InternetBanking.Core.Application.AssemblyInfo.cs
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Core.Application\obj\Debug\net5.0\InternetBanking.Core.Application.csproj.CoreCompileInputs.cache
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Core.Application\obj\Debug\net5.0\InternetBanking.Core.Application.csproj.CopyComplete
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Core.Application\obj\Debug\net5.0\InternetBanking.Core.Application.dll
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Core.Application\obj\Debug\net5.0\refint\InternetBanking.Core.Application.dll
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Core.Application\obj\Debug\net5.0\InternetBanking.Core.Application.pdb
+C:\Users\Joel\source\repos\InternetBanking\InternetBanking.Core.Application\obj\Debug\net5.0\ref\InternetBanking.Core.Application.dll
+>>>>>>> bd3e56343fafaaf699b9f4bb3865a42e04041a04
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking.Core.Application\bin\Debug\net5.0\InternetBanking.Core.Application.deps.json
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking.Core.Application\bin\Debug\net5.0\InternetBanking.Core.Application.dll
 C:\Users\LENOVO\workspace\InternetBanking\InternetBanking.Core.Application\bin\Debug\net5.0\InternetBanking.Core.Application.pdb
