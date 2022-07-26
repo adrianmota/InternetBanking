@@ -1,13 +1,14 @@
 ﻿using InternetBanking.Core.Application.Interfaces.Services;
 using InternetBanking.Core.Application.ViewModels.User;
 using Microsoft.AspNetCore.Mvc;
-using StockApp.Core.Application.Dtos.Account;
-using StockApp.Core.Application.Helpers;
+using InternetBanking.Core.Application.Dtos.Account;
+using InternetBanking.Core.Application.Helpers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System.Linq;
 using InternetBanking.Core.Application.ViewModels.Product;
 using InternetBanking.Core.Application.Enums;
+using WebApp.InternetBanking.Middlewares;
 
 namespace WebApp.InternetBanking.Controllers
 {
@@ -22,11 +23,13 @@ namespace WebApp.InternetBanking.Controllers
             _productService = productService;
         }
 
+        [ServiceFilter(typeof(LoginAuthorize))]
         public IActionResult Index()
         {
             return View(new LoginViewModel());
         }
 
+        [ServiceFilter(typeof(LoginAuthorize))]
         [HttpPost]
         public async Task<IActionResult> Index(LoginViewModel login)
         {
@@ -153,6 +156,11 @@ namespace WebApp.InternetBanking.Controllers
             await _userService.LogOut();
             HttpContext.Session.Remove("user");
             return RedirectToRoute(new { controller = "User", action = "Index" });
+        }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }

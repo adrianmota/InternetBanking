@@ -5,7 +5,7 @@ using InternetBanking.Core.Application.ViewModels.Product;
 using InternetBanking.Core.Application.ViewModels.Transaction;
 using InternetBanking.Core.Application.ViewModels.User;
 using InternetBanking.Core.Domain.Entities;
-using StockApp.Core.Application.Dtos.Account;
+using InternetBanking.Core.Application.Dtos.Account;
 
 namespace InternetBanking.Core.Application.Mappings
 {

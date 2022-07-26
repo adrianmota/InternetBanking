@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
-using StockApp.Core.Application.Dtos.Account;
-using StockApp.Core.Application.Helpers;
+using InternetBanking.Core.Application.Dtos.Account;
+using InternetBanking.Core.Application.Helpers;
 
 namespace WebApp.InternetBanking.Middlewares
 {

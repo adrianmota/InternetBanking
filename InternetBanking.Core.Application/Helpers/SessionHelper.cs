@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System.Text;
 
-namespace StockApp.Core.Application.Helpers
+namespace InternetBanking.Core.Application.Helpers
 {
     public static class SessionHelper
     {

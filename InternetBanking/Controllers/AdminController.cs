@@ -3,14 +3,16 @@ using InternetBanking.Core.Application.ViewModels.Admin;
 using InternetBanking.Core.Application.ViewModels.Transaction;
 using InternetBanking.Core.Application.ViewModels.User;
 using Microsoft.AspNetCore.Mvc;
-using StockApp.Core.Application.Dtos.Account;
+using InternetBanking.Core.Application.Dtos.Account;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using InternetBanking.Core.Application.Enums;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApp.InternetBanking.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly ITransactionService _transactionService;

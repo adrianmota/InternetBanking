@@ -35,6 +35,7 @@ namespace InternetBanking
             services.AddPersistenceInfrastructure(Configuration);
             services.AddIdentityInfrastructure(Configuration);
             services.AddApplicationLayer(Configuration);
+            services.AddScoped<LoginAuthorize>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<ValidateUserSession, ValidateUserSession>();
         }

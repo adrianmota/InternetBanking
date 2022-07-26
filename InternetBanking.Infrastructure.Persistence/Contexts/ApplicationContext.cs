@@ -2,8 +2,8 @@
 using InternetBanking.Core.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using StockApp.Core.Application.Dtos.Account;
-using StockApp.Core.Application.Helpers;
+using InternetBanking.Core.Application.Dtos.Account;
+using InternetBanking.Core.Application.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;

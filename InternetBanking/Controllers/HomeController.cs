@@ -7,16 +7,18 @@ using InternetBanking.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using StockApp.Core.Application.Dtos.Account;
-using StockApp.Core.Application.Helpers;
+using InternetBanking.Core.Application.Dtos.Account;
+using InternetBanking.Core.Application.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InternetBanking.Controllers
 {
+    [Authorize(Roles = "Client")]
     public class HomeController : Controller
     {
         private readonly IProductService _productService;
