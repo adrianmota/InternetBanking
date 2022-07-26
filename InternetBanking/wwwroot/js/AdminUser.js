@@ -15,6 +15,6 @@
         window.location = url;
     }
 
-    activeUser.addEventListener("click", () => { setState() });
-    deactiveUser.addEventListener("click", () => { setState() });
+    activeUser.addEventListener("click", () => setState);
+    deactiveUser.addEventListener("click", () => setState);
 });
