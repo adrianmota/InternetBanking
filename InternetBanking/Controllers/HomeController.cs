@@ -172,9 +172,93 @@ namespace InternetBanking.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Transaction()
+        public async Task<IActionResult> Transaction()
         {
-            return View();
+            var products = await _productService.GetProductsByUserId(_user.Id);
+            TransferMoneyViewModel transferVM = new();
+
+            transferVM.Accounts = products.FindAll(p =>
+                            p.Type == (int)ProductType.SavingAccount ||
+                            p.Type == (int)ProductType.MainSavingAccount);
+
+            if (transferVM.Accounts.Count == 1)
+            {
+                ModelState.AddModelError("onlyOneAccount", "No puedes hacer una transferencia debido a que solo tienes la cuenta de ahorros principal");
+                return View(new TransferMoneyViewModel());
+            }
+
+            transferVM.Transaction = new()
+            {
+                ClientId = _user.Id,
+                Type = (int)TransactionType.CashAdvance
+            };
+
+            return View(transferVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Transaction(TransferMoneyViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+
+            if (vm.Transaction.AccountFromId == vm.Transaction.AccountToId)
+            {
+                ModelState.AddModelError("amountNegative", "El monto no puede ser negativo");
+
+                var products = await _productService.GetProductsByUserId(_user.Id);
+
+                vm.Accounts = products.FindAll(p =>
+                                p.Type == (int)ProductType.SavingAccount ||
+                                p.Type == (int)ProductType.MainSavingAccount);
+
+                return View(vm);
+            }
+
+            if (vm.Transaction.Amount < 0)
+            {
+                ModelState.AddModelError("amountNegative", "El monto no puede ser negativo");
+
+                var products = await _productService.GetProductsByUserId(_user.Id);
+
+                vm.Accounts = products.FindAll(p =>
+                                p.Type == (int)ProductType.SavingAccount ||
+                                p.Type == (int)ProductType.MainSavingAccount);
+
+                return View(vm);
+            }
+
+            var firstAccount = await _productService.GetByIdSaveViewModel(vm.Transaction.AccountFromId);
+            double totalAmount = firstAccount.Amount + vm.Transaction.Amount;
+
+            bool isEnoughAmount = await _productService.CheckAccountAmount(vm.Transaction.AccountFromId, totalAmount);
+            if (!isEnoughAmount)
+            {
+                ModelState.AddModelError("notEnoughAmount", "La transferencia sobrepasa la cantidad de dinero en la primera cuenta");
+
+                var products = await _productService.GetProductsByUserId(_user.Id);
+
+                vm.Accounts = products.FindAll(p =>
+                                p.Type == (int)ProductType.SavingAccount ||
+                                p.Type == (int)ProductType.MainSavingAccount);
+
+                return View(vm);
+            }
+
+            var transaction = await _transactionService.Add(vm.Transaction);
+
+            if (transaction == null)
+            {
+                ModelState.AddModelError("errorTransferingAmount", "Error transfiriendo el dinero");
+                return View(vm);
+            }
+
+            await _productService.SubstractAmountToProduct(transaction.AccountFromId, transaction.Amount);
+            await _productService.AddAmountToProduct(transaction.AccountToId, transaction.Amount);
+
+            return RedirectToAction("Index");
         }
     }
 }
