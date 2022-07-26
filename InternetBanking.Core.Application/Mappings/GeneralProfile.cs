@@ -52,8 +52,6 @@ namespace InternetBanking.Core.Application.Mappings
                 .ForMember(d => d.CreatedBy, o => o.Ignore())
                 .ForMember(d => d.Modified, o => o.Ignore())
                 .ForMember(d => d.ModifiedBy, o => o.Ignore())
-                .ForMember(d => d.TransactionsIn, o => o.Ignore())
-                .ForMember(d => d.TransactionsOut, o => o.Ignore())
                 .ForMember(d => d.Beneficiaries, o => o.Ignore());
 
             CreateMap<Beneficiary, BeneficiaryViewModel>()
@@ -77,10 +75,14 @@ namespace InternetBanking.Core.Application.Mappings
                 .ReverseMap()
                 .ForMember(d => d.CreatedBy, o => o.Ignore())
                 .ForMember(d => d.Modified, o => o.Ignore())
-                .ForMember(d => d.ModifiedBy, o => o.Ignore())
-                .ForMember(d => d.ClientId, o => o.Ignore())
-                .ForMember(d => d.AccountToId, o => o.Ignore())
-                .ForMember(d => d.AccountFromId, o => o.Ignore());
+                .ForMember(d => d.ModifiedBy, o => o.Ignore());
+
+            CreateMap<Transaction, SaveTransactionViewModel>()
+                .ReverseMap()
+                .ForMember(d => d.Created, o => o.Ignore())
+                .ForMember(d => d.CreatedBy, o => o.Ignore())
+                .ForMember(d => d.Modified, o => o.Ignore())
+                .ForMember(d => d.ModifiedBy, o => o.Ignore());
         }
     }
 }

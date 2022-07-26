@@ -123,10 +123,6 @@ namespace InternetBanking.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountFromId");
-
-                    b.HasIndex("AccountToId");
-
                     b.ToTable("Transactions");
                 });
 
@@ -141,32 +137,9 @@ namespace InternetBanking.Infrastructure.Persistence.Migrations
                     b.Navigation("Account");
                 });
 
-            modelBuilder.Entity("InternetBanking.Core.Domain.Entities.Transaction", b =>
-                {
-                    b.HasOne("InternetBanking.Core.Domain.Entities.Product", "AccountFrom")
-                        .WithMany("TransactionsOut")
-                        .HasForeignKey("AccountFromId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("InternetBanking.Core.Domain.Entities.Product", "AccountTo")
-                        .WithMany("TransactionsIn")
-                        .HasForeignKey("AccountToId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("AccountFrom");
-
-                    b.Navigation("AccountTo");
-                });
-
             modelBuilder.Entity("InternetBanking.Core.Domain.Entities.Product", b =>
                 {
                     b.Navigation("Beneficiaries");
-
-                    b.Navigation("TransactionsIn");
-
-                    b.Navigation("TransactionsOut");
                 });
 #pragma warning restore 612, 618
         }

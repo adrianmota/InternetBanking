@@ -23,8 +23,8 @@ namespace InternetBanking.Core.Domain.Entities
 
         //Navigation props
         //public User Client { get; set; }
-        public Product AccountFrom { get; set; }
-        public Product AccountTo { get; set; }
+        //public Product AccountFrom { get; set; }
+        //public Product AccountTo { get; set; }
         #endregion
 
         //Explanation for Direct:

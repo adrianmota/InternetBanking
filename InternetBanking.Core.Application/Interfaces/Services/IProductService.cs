@@ -13,5 +13,9 @@ namespace InternetBanking.Core.Application.Interfaces.Services
     {
         Task AddAmountToMainAccount(string userId, double amount);
         Task<List<ProductViewModel>> GetProductsByUserId(string userId);
+        Task<bool> CheckAccountAmount(int accountId, double amount);
+        Task AddAmountToProduct(int accountId, double amount);
+        Task SubstractAmountToProduct(int accountId, double amount);
+        Task<bool> CheckCreditCardLimit(int cardId, double amount);
     }
 }

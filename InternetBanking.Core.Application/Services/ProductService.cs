@@ -76,5 +76,49 @@ namespace InternetBanking.Core.Application.Services
             List<Product> products = await _productRepository.GetAllAsync();
             return _mapper.Map<List<ProductViewModel>>(products.FindAll(p => p.ClientId == userId));
         }
+
+        public async Task<bool> CheckAccountAmount(int accountId, double amount)
+        {
+            var account = await _productRepository.GetByIdAsync(accountId);
+
+            if (amount < account.Amount)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> CheckCreditCardLimit(int cardId, double amount)
+        {
+            var card = await _productRepository.GetByIdAsync(cardId);
+
+            if (amount < card.Limit)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task AddAmountToProduct(int accountId, double amount)
+        {
+            Product account = await _productRepository.GetByIdAsync(accountId);
+            double totalAmount = account.Amount + amount;
+            account.Amount = Math.Round(totalAmount, 2);
+            await _productRepository.UpdateAsync(account, accountId);
+        }
+
+        public async Task SubstractAmountToProduct(int accountId, double amount)
+        {
+            Product account = await _productRepository.GetByIdAsync(accountId);
+            double totalAmount = account.Amount - amount;
+            account.Amount = Math.Round(totalAmount, 2);
+            await _productRepository.UpdateAsync(account, accountId);
+        }
     }
 }

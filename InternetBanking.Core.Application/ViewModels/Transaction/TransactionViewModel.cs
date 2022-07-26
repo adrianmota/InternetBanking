@@ -14,6 +14,9 @@ namespace InternetBanking.Core.Application.ViewModels.Transaction
         public int Type { get; set; }
         public double Amount { get; set; }
         public DateTime Created { get; set; }
+        public string ClientId { get; set; }
+        public int AccountFromId { get; set; }
+        public int AccountToId { get; set; }
 
         public UserViewModel Client { get; set; }
         public ProductViewModel AccountFrom { get; set; }

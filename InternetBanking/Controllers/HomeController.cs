@@ -2,6 +2,7 @@
 using InternetBanking.Core.Application.Enums;
 using InternetBanking.Core.Application.Interfaces.Services;
 using InternetBanking.Core.Application.ViewModels.Product;
+using InternetBanking.Core.Application.ViewModels.Transaction;
 using InternetBanking.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,16 +20,18 @@ namespace InternetBanking.Controllers
     public class HomeController : Controller
     {
         private readonly IProductService _productService;
+        private readonly ITransactionService _transactionService;
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContext;
         private readonly AuthenticationResponse _user;
 
-        public HomeController(IProductService productService, IMapper mapper,IHttpContextAccessor httpContext)
+        public HomeController(IProductService productService, IMapper mapper,IHttpContextAccessor httpContext, ITransactionService transactionService)
         {
             _productService = productService;
             _mapper = mapper;
             _httpContext = httpContext;
             _user = _httpContext.HttpContext.Session.Get<AuthenticationResponse>("user");
+            _transactionService = transactionService;
         }
 
         public async Task<IActionResult> Index()
@@ -85,9 +88,88 @@ namespace InternetBanking.Controllers
             return View();
         }
 
-        public IActionResult MoneyAdvance()
+        public async Task<IActionResult> MoneyAdvance()
         {
-            return View();
+            var products = await _productService.GetProductsByUserId(_user.Id);
+            MoneyAdvanceViewModel moneyAdvance = new();
+
+            moneyAdvance.Accounts = products.FindAll(p =>
+                            p.Type == (int)ProductType.SavingAccount ||
+                            p.Type == (int)ProductType.MainSavingAccount);
+
+            moneyAdvance.CreditCards = products.FindAll(p => p.Type == (int)ProductType.CreditCard);
+
+            if (moneyAdvance.CreditCards.Count == 0)
+            {
+                ModelState.AddModelError("userWithoutCards", "No tienes ninguna tarjeta de credito asignada para realizar esta transaccion");
+                return View(new MoneyAdvanceViewModel());
+            }
+
+            moneyAdvance.Transaction = new()
+            {
+                ClientId = _user.Id,
+                Type = (int)TransactionType.CashAdvance
+            };
+
+            return View(moneyAdvance);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> MoneyAdvance(MoneyAdvanceViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+
+            if (vm.Transaction.Amount<0)
+            {
+                ModelState.AddModelError("amountNegative", "El monto no puede ser negativo");
+
+                var products = await _productService.GetProductsByUserId(_user.Id);
+
+                vm.Accounts = products.FindAll(p =>
+                                p.Type == (int)ProductType.SavingAccount ||
+                                p.Type == (int)ProductType.MainSavingAccount);
+
+                vm.CreditCards = products.FindAll(p => p.Type == (int)ProductType.CreditCard);
+
+                return View(vm);
+            }
+
+            var creditCard = await _productService.GetByIdSaveViewModel(vm.Transaction.AccountFromId);
+            double totalAmount = creditCard.Amount + vm.Transaction.Amount;
+
+            bool isEnoughAmount = await _productService.CheckCreditCardLimit(vm.Transaction.AccountFromId, totalAmount);
+            if (!isEnoughAmount)
+            {
+                ModelState.AddModelError("notEnoughAmount", "La transferencia sobrepasa el limite de la tarjeta");
+
+                var products = await _productService.GetProductsByUserId(_user.Id);
+
+                vm.Accounts = products.FindAll(p =>
+                                p.Type == (int)ProductType.SavingAccount ||
+                                p.Type == (int)ProductType.MainSavingAccount);
+
+                vm.CreditCards = products.FindAll(p => p.Type == (int)ProductType.CreditCard);
+
+                return View(vm);
+            }
+
+            var transaction = await _transactionService.Add(vm.Transaction);
+
+            if (transaction == null)
+            {
+                ModelState.AddModelError("errorTransferingAmount", "Error transfiriendo el dinero");
+                return View(vm);
+            }
+
+            await _productService.AddAmountToProduct(transaction.AccountToId, transaction.Amount);
+
+            double cardAmount = Math.Round(transaction.Amount * 1.0625, 2);
+            await _productService.AddAmountToProduct(transaction.AccountFromId, cardAmount);
+
+            return RedirectToAction("Index");
         }
 
         public IActionResult Transaction()

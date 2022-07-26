@@ -77,33 +77,13 @@ namespace InternetBanking.Infrastructure.Persistence.Contexts
             //Weak relationship
             //ForeignKey(Transaction.ClientId)
 
-            ////Product-Pays(Out), this one for the Pays that came out from the Product/Account
-            //builder.Entity<Product>()
-            //    .HasMany<Pay>(prod => prod.PaysOut)
-            //    .WithOne(pay => pay.AccountFrom)
-            //    .HasForeignKey(pay => pay.AccountFromId)
-            //    .OnDelete(DeleteBehavior.NoAction);
-
-            ////Product-Pays(In), this one for the Pays that enter the Product/Account
-            //builder.Entity<Product>()
-            //    .HasMany<Pay>(prod => prod.PaysIn)
-            //    .WithOne(pay => pay.AccountTo)
-            //    .HasForeignKey(pay => pay.AccountToId)
-            //    .OnDelete(DeleteBehavior.NoAction);
-
             //Product-Transactions(Out), this one for the Transactions that came out from the Product/Account
-            builder.Entity<Product>()
-                .HasMany<Transaction>(prod => prod.TransactionsOut)
-                .WithOne(tran => tran.AccountFrom)
-                .HasForeignKey(tran => tran.AccountFromId)
-                .OnDelete(DeleteBehavior.NoAction);
+            //Weak relationship
+            //ForeignKey(Transaction.AccountFromId)
 
             //Product-Transactions(In), this one for the Transactions that enter the Product/Account
-            builder.Entity<Product>()
-                .HasMany<Transaction>(prod => prod.TransactionsIn)
-                .WithOne(tran => tran.AccountTo)
-                .HasForeignKey(tran => tran.AccountToId)
-                .OnDelete(DeleteBehavior.NoAction);
+            //Weak relationship
+            //ForeignKey(Transaction.AccountToId)
 
             //Relation M-M between Clients and Accounts for Beneficiaries
             //Weak relationship
