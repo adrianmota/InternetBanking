@@ -6,7 +6,7 @@ using InternetBanking.Core.Application.ViewModels.Admin;
 using InternetBanking.Core.Application.ViewModels.Role;
 using InternetBanking.Core.Application.ViewModels.User;
 using InternetBanking.Core.Domain.Entities;
-using StockApp.Core.Application.Dtos.Account;
+using InternetBanking.Core.Application.Dtos.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -11,7 +11,7 @@ namespace InternetBanking.Infrastructure.Identity.Seeds
         public static async Task SeedAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             ApplicationUser defaultUser = new();
-            defaultUser.UserName = "AdminUser";
+            defaultUser.UserName = "adminuser";
             defaultUser.Email = "adminuser@email.com";
             defaultUser.EmailConfirmed = true;
             defaultUser.FirstName = "Manuel";

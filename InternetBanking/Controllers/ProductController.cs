@@ -4,12 +4,14 @@ using InternetBanking.Core.Application.Interfaces.Services;
 using InternetBanking.Core.Application.ViewModels.Product;
 using InternetBanking.Core.Application.ViewModels.User;
 using Microsoft.AspNetCore.Mvc;
-using StockApp.Core.Application.Dtos.Account;
+using InternetBanking.Core.Application.Dtos.Account;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApp.InternetBanking.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         private readonly IProductService _productService;

@@ -5,7 +5,7 @@ using InternetBanking.Core.Application.ViewModels.User;
 using InternetBanking.Infrastructure.Identity.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
-using StockApp.Core.Application.Dtos.Account;
+using InternetBanking.Core.Application.Dtos.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -22,7 +22,6 @@ namespace InternetBanking.Core.Application
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<ITransactionService, TransactionService>();
-            services.AddTransient<IBeneficiaryService, BeneficiaryService>();
         }
     }
 }

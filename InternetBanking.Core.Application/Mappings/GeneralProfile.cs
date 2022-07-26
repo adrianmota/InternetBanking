@@ -5,7 +5,7 @@ using InternetBanking.Core.Application.ViewModels.Product;
 using InternetBanking.Core.Application.ViewModels.Transaction;
 using InternetBanking.Core.Application.ViewModels.User;
 using InternetBanking.Core.Domain.Entities;
-using StockApp.Core.Application.Dtos.Account;
+using InternetBanking.Core.Application.Dtos.Account;
 
 namespace InternetBanking.Core.Application.Mappings
 {
@@ -55,9 +55,8 @@ namespace InternetBanking.Core.Application.Mappings
                 .ForMember(d => d.Beneficiaries, o => o.Ignore());
 
             CreateMap<Beneficiary, BeneficiaryViewModel>()
-                .ForMember(d => d.Name, o => o.Ignore())
-                .ForMember(d => d.LastName, o => o.Ignore())
                 .ReverseMap()
+                .ForMember(d => d.Id, o => o.Ignore())
                 .ForMember(d => d.Created, o => o.Ignore())
                 .ForMember(d => d.CreatedBy, o => o.Ignore())
                 .ForMember(d => d.Modified, o => o.Ignore())
