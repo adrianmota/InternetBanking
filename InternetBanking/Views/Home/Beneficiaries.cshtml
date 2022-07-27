@@ -1,5 +1,110 @@
-﻿@{
+﻿@using InternetBanking.Core.Application.ViewModels.Beneficiary
+@model ShowBeneficiariesViewModel
+@{
     ViewData["Title"] = "Beneficiaries";
 }
 
+<div class="row">
+    <div class="col-md-3">
         <h2>Beneficiarios</h2>
+    </div>
+    <div class="col-md-3 offset-6">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addModal">
+          Agregar Beneficiario
+        </button>
+    </div>
+</div>
+
+<div class="row">
+        @Html.ValidationSummary(false, "", new {@class = "text-danger"})
+</div>
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="card">
+          <div class="card-body">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Numero de cuenta</th>
+                        <th scope="col">Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(Model.Beneficiaries.Count==0){
+                        <tr>
+                            <td colspan="4">
+                                <h5>No tienes beneficiarios agregados</h5>
+                            </td>
+                        </tr>
+                    }else{
+                        @foreach (var ben in Model.Beneficiaries)
+                        {
+                            <tr>
+                                <td>@ben.Name</td>
+                                <td>@ben.LastName</td>
+                                <td>@ben.AccountId</td>
+                                <td>
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="setBeneficiary(@ben.AccountId)">
+                                      Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Modales-->
+
+<!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar Beneficiario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" asp-action="AddBeneficiary" asp-controller="Home">
+            <div class="mb-3">
+                <label asp-for="SaveBeneficiary.AccountId" class="form-label">Numero de cuenta</label>
+                <input type="number" asp-for="SaveBeneficiary.AccountId" class="form-control">
+            </div>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Agregar</button>
+            <input type="hidden" asp-for="SaveBeneficiary.ClientId" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">¿Estas seguro que quieres eliminar este beneficiario?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Si eliminas a este beneficiario ya no podras verlo en esta lista y no sera tan simple transferirle. Puede volver a agregar esta cuenta como beneficiario otra vez cuando quiera
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-danger" id="deleteButton">Borrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="~/js/Beneficiary.js"></script>

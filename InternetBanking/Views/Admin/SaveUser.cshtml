@@ -24,7 +24,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     }
-                    <form method="post" asp-controller="User" asp-action="@actionMethod">
+                    <form method="post" asp-controller="Admin" asp-action="@actionMethod">
                         <div class="mb-3">
                             <label asp-for="FirstName" class="form-label">Nombre</label>
                             <input asp-for="FirstName" class="form-control" />
@@ -92,7 +92,7 @@
                         }
 
                         <button type="submit" class="btn btn-primary">Guardar</button>
-                        <a class="btn btn-secondary" asp-controller="User" asp-action="AdministrateUsers">Volver atrás</a>
+                        <a class="btn btn-secondary" asp-controller="Admin" asp-action="AdministrateUsers">Volver atrás</a>
                     </form>
                 </div>
             </div>

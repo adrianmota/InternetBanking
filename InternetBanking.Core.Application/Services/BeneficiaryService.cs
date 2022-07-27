@@ -35,7 +35,7 @@ namespace InternetBanking.Core.Application.Services
 
         public async Task DeleteByUserAndAccount(string userId, int accountId)
         {
-            var beneficiaries=await _beneficiaryRepository.GetAllAsync();
+            var beneficiaries = await _beneficiaryRepository.GetAllAsync();
             var beneficiary = beneficiaries.FirstOrDefault(b => b.ClientId == userId && b.AccountId == accountId);
 
             await _beneficiaryRepository.DeleteAsync(beneficiary);

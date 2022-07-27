@@ -55,8 +55,9 @@ namespace InternetBanking.Core.Application.Mappings
                 .ForMember(d => d.Beneficiaries, o => o.Ignore());
 
             CreateMap<Beneficiary, BeneficiaryViewModel>()
+                .ForMember(d => d.Name, o => o.Ignore())
+                .ForMember(d => d.LastName, o => o.Ignore())
                 .ReverseMap()
-                .ForMember(d => d.Id, o => o.Ignore())
                 .ForMember(d => d.Created, o => o.Ignore())
                 .ForMember(d => d.CreatedBy, o => o.Ignore())
                 .ForMember(d => d.Modified, o => o.Ignore())

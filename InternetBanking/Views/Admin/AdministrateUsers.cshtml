@@ -13,7 +13,7 @@
         <h2>Administrar Usuarios</h2>
     </div>
     <div class="col-md-3 offset-5">
-        <a class="btn btn-outline-primary" asp-controller="User" asp-action="Create">Crear Usuario</a>
+        <a class="btn btn-outline-primary" asp-controller="Admin" asp-action="Create">Crear Usuario</a>
     </div>
 </div>
 
@@ -81,24 +81,13 @@
                                                 {
                                                     <button class="btn btn-outline-success" onclick="setUser('@client.Id')" data-bs-toggle="modal" data-bs-target="#modalActivar">Activar</button>
                                                 }
-                                                <a class="btn btn-outline-warning" asp-controller="User" asp-action="Edit" asp-route-id="@client.Id">Editar</a>
+                                                <a class="btn btn-outline-warning" asp-controller="Admin" asp-action="Edit" asp-route-id="@client.Id">Editar</a>
                                                 <a class="btn btn-outline-primary" asp-controller="Product" asp-action="Index" asp-route-userId="@client.Id">Ver Productos</a>
                                             </td>
                                         </tr>
                                     }
                                 }
 
-                                @*<tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>noc</td>
-                                </tr>
-                                <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>aja</td>
-                                </tr>*@
                             </tbody>
                         </table>
                     </div>
@@ -153,7 +142,7 @@
                                                     {
                                                         <button class="btn btn-outline-success" onclick="setUser('@admin.Id')" data-bs-toggle="modal" data-bs-target="#modalActivar">Activar</button>
                                                     }
-                                                    <a class="btn btn-outline-warning" asp-controller="User" asp-action="Edit" asp-route-id="@admin.Id">Editar</a>
+                                                    <a class="btn btn-outline-warning" asp-controller="Admin" asp-action="Edit" asp-route-id="@admin.Id">Editar</a>
                                                 }
                                                 else
                                                 {
@@ -163,17 +152,6 @@
                                         </tr>
                                     }
                                 }
-                                @*<tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>noc</td>
-                                </tr>
-                                <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>aja</td>
-                                </tr>*@
                             </tbody>
                         </table>
                     </div>
