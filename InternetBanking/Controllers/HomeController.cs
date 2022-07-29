@@ -365,7 +365,7 @@ namespace InternetBanking.Controllers
             if (loanViewModel.Loans.Count == 0)
             {
                 ModelState.AddModelError("userWithoutCards", "No tienes ningun prestamos que pagar");
-                return View(new CreditCardPayViewModel());
+                return View(new LoanPayViewModel());
             }
 
             loanViewModel.Transaction = new()
