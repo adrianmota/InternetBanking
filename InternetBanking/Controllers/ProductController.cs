@@ -27,33 +27,40 @@ namespace WebApp.InternetBanking.Controllers
 
         public async Task<IActionResult> Index(string userId)
         {
-            ProductListViewModel productList = new();
-            SaveUserViewModel saveUser = await _userService.GetByIdSaveViewModel(userId);
-            productList.User = _mapper.Map<UserViewModel>(saveUser);
-
-            List<ProductViewModel> products = await _productService.GetProductsByUserId(userId);
-
-            productList.Accounts = new();
-            productList.CreditCards = new();
-            productList.Loans = new();
-
-            foreach(ProductViewModel product in products)
+            if (userId != null)
             {
-                if (product.Type == (int)ProductType.SavingAccount || product.Type == (int)ProductType.MainSavingAccount)
-                {
-                    productList.Accounts.Add(product);
-                }
-                else if (product.Type == (int)ProductType.CreditCard)
-                {
-                    productList.CreditCards.Add(product);
-                }
-                else if (product.Type == (int)ProductType.Loan)
-                {
-                    productList.Loans.Add(product);
-                }
-            }
+                ProductListViewModel productList = new();
+                SaveUserViewModel saveUser = await _userService.GetByIdSaveViewModel(userId);
+                productList.User = _mapper.Map<UserViewModel>(saveUser);
 
-            return View(productList);
+                List<ProductViewModel> products = await _productService.GetProductsByUserId(userId);
+
+                productList.Accounts = new();
+                productList.CreditCards = new();
+                productList.Loans = new();
+
+                foreach (ProductViewModel product in products)
+                {
+                    if (product.Type == (int)ProductType.SavingAccount || product.Type == (int)ProductType.MainSavingAccount)
+                    {
+                        productList.Accounts.Add(product);
+                    }
+                    else if (product.Type == (int)ProductType.CreditCard)
+                    {
+                        productList.CreditCards.Add(product);
+                    }
+                    else if (product.Type == (int)ProductType.Loan)
+                    {
+                        productList.Loans.Add(product);
+                    }
+                }
+
+                return View(productList);
+            }
+            else
+            {
+                return RedirectToRoute(new { controller = "Admin", action = "Index" });
+            }
         }
 
         public IActionResult Add(string userId)
