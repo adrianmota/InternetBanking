@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using InternetBanking.Core.Application.ViewModels.Beneficiary;
-using InternetBanking.Core.Application.ViewModels.Pay;
 using InternetBanking.Core.Application.ViewModels.Product;
 using InternetBanking.Core.Application.ViewModels.Transaction;
 using InternetBanking.Core.Application.ViewModels.User;
@@ -30,7 +29,6 @@ namespace InternetBanking.Core.Application.Mappings
                 .ReverseMap()
                 .ForMember(d => d.IsActive, o => o.Ignore())
                 .ForMember(d => d.Products, o => o.Ignore())
-                .ForMember(d => d.Pays, o => o.Ignore())
                 .ForMember(d => d.Transactions, o => o.Ignore())
                 .ForMember(d => d.Beneficiaries, o => o.Ignore());
 

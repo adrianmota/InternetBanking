@@ -43,6 +43,10 @@ namespace InternetBanking.Controllers
             _userService = userService;
         }
 
+ 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public async Task<IActionResult> Index()
         {
             ProductListViewModel productList = new();
@@ -72,26 +76,483 @@ namespace InternetBanking.Controllers
             return View(productList);
         }
 
-        public IActionResult CreditCardPay()
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public async Task<IActionResult> CreditCardPay()
         {
-            return View();
+            var products = await _productService.GetProductsByUserId(_user.Id);
+            CreditCardPayViewModel cardViewModel = new();
+
+            cardViewModel.Accounts = products.FindAll(p =>
+                            p.Type == (int)ProductType.SavingAccount ||
+                            p.Type == (int)ProductType.MainSavingAccount);
+
+            cardViewModel.CreditCards = products.FindAll(p => p.Type == (int)ProductType.CreditCard);
+
+            if (cardViewModel.CreditCards.Count == 0)
+            {
+                ModelState.AddModelError("userWithoutCards", "No tienes ninguna tarjeta de credito asignada para pagar");
+                return View(new CreditCardPayViewModel());
+            }
+
+            cardViewModel.Transaction = new()
+            {
+                ClientId = _user.Id,
+                Type = (int)TransactionType.CreditCard
+            };
+
+            return View(cardViewModel);
         }
 
-        public IActionResult ForBeneficiaryPay()
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        [HttpPost]
+        public async Task<IActionResult> CreditCardPay(CreditCardPayViewModel vm)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                var products = await _productService.GetProductsByUserId(_user.Id);
+
+                vm.Accounts = products.FindAll(p =>
+                                p.Type == (int)ProductType.SavingAccount ||
+                                p.Type == (int)ProductType.MainSavingAccount);
+
+                vm.CreditCards = products.FindAll(p => p.Type == (int)ProductType.CreditCard);
+
+                return View(vm);
+            }
+
+            if (vm.Transaction.Amount < 0)
+            {
+                ModelState.AddModelError("amountNegative", "El monto no puede ser negativo");
+
+                var products = await _productService.GetProductsByUserId(_user.Id);
+
+                vm.Accounts = products.FindAll(p =>
+                                p.Type == (int)ProductType.SavingAccount ||
+                                p.Type == (int)ProductType.MainSavingAccount);
+
+                vm.CreditCards = products.FindAll(p => p.Type == (int)ProductType.CreditCard);
+
+                return View(vm);
+            }
+
+            bool isEnoughAmount = await _productService.CheckAccountAmount(vm.Transaction.AccountFromId, vm.Transaction.Amount);
+            if (!isEnoughAmount)
+            {
+                ModelState.AddModelError("notEnoughAmount", "La transferencia sobrepasa el limite de la cuenta");
+
+                var products = await _productService.GetProductsByUserId(_user.Id);
+
+                vm.Accounts = products.FindAll(p =>
+                                p.Type == (int)ProductType.SavingAccount ||
+                                p.Type == (int)ProductType.MainSavingAccount);
+
+                vm.CreditCards = products.FindAll(p => p.Type == (int)ProductType.CreditCard);
+
+                return View(vm);
+            }
+
+            bool isMoreThanDebt= !(await _productService.CheckAccountAmount(vm.Transaction.AccountToId, vm.Transaction.Amount));
+            double trueAmount;
+            var card = await _productService.GetByIdSaveViewModel(vm.Transaction.AccountToId);
+
+            if (isMoreThanDebt)
+            {
+                trueAmount = card.Amount;
+            }
+            else
+            {
+                trueAmount = vm.Transaction.Amount;
+            }
+
+            vm.Transaction.Amount = trueAmount;
+
+            var transaction = await _transactionService.Add(vm.Transaction);
+
+            if (transaction == null)
+            {
+                ModelState.AddModelError("errorTransferingAmount", "Error pagando a la tarjeta de credito");
+                return View(vm);
+            }
+
+            await _productService.SubstractAmountToProduct(transaction.AccountToId, transaction.Amount);
+
+            await _productService.SubstractAmountToProduct(transaction.AccountFromId, transaction.Amount);
+
+            return RedirectToAction("Index");
         }
 
-        public IActionResult LoanPay()
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public async Task<IActionResult> ForBeneficiaryPay()
         {
-            return View();
+            var products = await _productService.GetProductsByUserId(_user.Id);
+            BeneficiariesPayViewModel benVM = new();
+
+            benVM.Accounts = products.FindAll(p =>
+                            p.Type == (int)ProductType.SavingAccount ||
+                            p.Type == (int)ProductType.MainSavingAccount);
+
+            var beneficiaries = await _beneficiaryService.GetBeneficiariesByUser(_user.Id);
+            List<BeneficiaryViewModel> beneficiaryList = new(beneficiaries);
+
+            for (int i = 0; i < beneficiaries.Count; i++)
+            {
+                var beneficiary = beneficiaries[i];
+                var account = await _productService.GetByIdSaveViewModel(beneficiary.AccountId);
+                var user = await _userService.GetByIdSaveViewModel(account.ClientId);
+
+                beneficiaryList[i].Name = user.FirstName;
+                beneficiaryList[i].LastName = user.LastName;
+            }
+
+            if (beneficiaryList.Count == 0)
+            {
+                ModelState.AddModelError("userWithoutCards", "No tienes ninguna cuenta agregada como beneficiaria");
+                return View(new BeneficiariesPayViewModel());
+            }
+
+            benVM.Beneficiaries = beneficiaryList;
+
+            benVM.Pay = new()
+            {
+                ClientId = _user.Id,
+                Type = (int)TransactionType.ForBeneficiary
+            };
+
+            return View(benVM);
         }
 
-        public IActionResult ExpressPay()
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        [HttpPost]
+        public async Task<IActionResult> ForBeneficiaryPay(BeneficiariesPayViewModel vm)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                var products = await _productService.GetProductsByUserId(_user.Id);
+
+                vm.Accounts = products.FindAll(p =>
+                                p.Type == (int)ProductType.SavingAccount ||
+                                p.Type == (int)ProductType.MainSavingAccount);
+
+                var beneficiaries = await _beneficiaryService.GetBeneficiariesByUser(_user.Id);
+                List<BeneficiaryViewModel> beneficiaryList = new(beneficiaries);
+
+                for (int i = 0; i < beneficiaries.Count; i++)
+                {
+                    var beneficiary = beneficiaries[i];
+                    var account = await _productService.GetByIdSaveViewModel(beneficiary.AccountId);
+                    var user = await _userService.GetByIdSaveViewModel(account.ClientId);
+
+                    beneficiaryList[i].Name = user.FirstName;
+                    beneficiaryList[i].LastName = user.LastName;
+                }
+
+                if (beneficiaryList.Count == 0)
+                {
+                    ModelState.AddModelError("userWithoutCards", "No tienes ninguna cuenta agregada como beneficiaria");
+                    return View(new BeneficiariesPayViewModel());
+                }
+
+                vm.Beneficiaries = beneficiaryList;
+
+                return View(vm);
+            }
+
+            if (vm.Pay.Amount < 0)
+            {
+                ModelState.AddModelError("amountNegative", "El monto no puede ser negativo");
+
+                var products = await _productService.GetProductsByUserId(_user.Id);
+
+                vm.Accounts = products.FindAll(p =>
+                                p.Type == (int)ProductType.SavingAccount ||
+                                p.Type == (int)ProductType.MainSavingAccount);
+
+                var beneficiaries = await _beneficiaryService.GetBeneficiariesByUser(_user.Id);
+                List<BeneficiaryViewModel> beneficiaryList = new(beneficiaries);
+
+                for (int i = 0; i < beneficiaries.Count; i++)
+                {
+                    var beneficiary = beneficiaries[i];
+                    var account = await _productService.GetByIdSaveViewModel(beneficiary.AccountId);
+                    var user = await _userService.GetByIdSaveViewModel(account.ClientId);
+
+                    beneficiaryList[i].Name = user.FirstName;
+                    beneficiaryList[i].LastName = user.LastName;
+                }
+
+                if (beneficiaryList.Count == 0)
+                {
+                    ModelState.AddModelError("userWithoutCards", "No tienes ninguna cuenta agregada como beneficiaria");
+                    return View(new BeneficiariesPayViewModel());
+                }
+
+                vm.Beneficiaries = beneficiaryList;
+
+                return View(vm);
+            }
+
+            bool isEnoughAmount = await _productService.CheckAccountAmount(vm.Pay.AccountFromId, vm.Pay.Amount);
+            if (!isEnoughAmount)
+            {
+                ModelState.AddModelError("notEnoughAmount", "La transferencia sobrepasa el limite de la cuenta");
+
+                var products = await _productService.GetProductsByUserId(_user.Id);
+
+                vm.Accounts = products.FindAll(p =>
+                                p.Type == (int)ProductType.SavingAccount ||
+                                p.Type == (int)ProductType.MainSavingAccount);
+
+                var beneficiaries = await _beneficiaryService.GetBeneficiariesByUser(_user.Id);
+                List<BeneficiaryViewModel> beneficiaryList = new(beneficiaries);
+
+                for (int i = 0; i < beneficiaries.Count; i++)
+                {
+                    var beneficiary = beneficiaries[i];
+                    var account = await _productService.GetByIdSaveViewModel(beneficiary.AccountId);
+                    var user = await _userService.GetByIdSaveViewModel(account.ClientId);
+
+                    beneficiaryList[i].Name = user.FirstName;
+                    beneficiaryList[i].LastName = user.LastName;
+                }
+
+                if (beneficiaryList.Count == 0)
+                {
+                    ModelState.AddModelError("userWithoutCards", "No tienes ninguna cuenta agregada como beneficiaria");
+                    return View(new BeneficiariesPayViewModel());
+                }
+
+                vm.Beneficiaries = beneficiaryList;
+
+                return View(vm);
+            }
+
+            var pay = await _transactionService.Add(vm.Pay);
+
+            if (pay == null)
+            {
+                ModelState.AddModelError("errorTransferingAmount", "Error al pagar a la cuenta solicitada");
+                return View(vm);
+            }
+
+            await _productService.SubstractAmountToProduct(pay.AccountFromId, pay.Amount);
+            await _productService.AddAmountToProduct(pay.AccountToId, pay.Amount);
+
+            return RedirectToAction("Index");
         }
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public async Task<IActionResult> LoanPay()
+        {
+            var products = await _productService.GetProductsByUserId(_user.Id);
+            LoanPayViewModel loanViewModel = new();
+
+            loanViewModel.Accounts = products.FindAll(p =>
+                            p.Type == (int)ProductType.SavingAccount ||
+                            p.Type == (int)ProductType.MainSavingAccount);
+
+            loanViewModel.Loans = products.FindAll(p => p.Type == (int)ProductType.Loan);
+
+            if (loanViewModel.Loans.Count == 0)
+            {
+                ModelState.AddModelError("userWithoutCards", "No tienes ningun prestamos que pagar");
+                return View(new CreditCardPayViewModel());
+            }
+
+            loanViewModel.Transaction = new()
+            {
+                ClientId = _user.Id,
+                Type = (int)TransactionType.CreditCard
+            };
+
+            return View(loanViewModel);
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        [HttpPost]
+        public async Task<IActionResult> LoanPay(LoanPayViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                var products = await _productService.GetProductsByUserId(_user.Id);
+
+                vm.Accounts = products.FindAll(p =>
+                                p.Type == (int)ProductType.SavingAccount ||
+                                p.Type == (int)ProductType.MainSavingAccount);
+
+                vm.Loans = products.FindAll(p => p.Type == (int)ProductType.Loan);
+
+                return View(vm);
+            }
+
+            if (vm.Transaction.Amount < 0)
+            {
+                ModelState.AddModelError("amountNegative", "El monto no puede ser negativo");
+
+                var products = await _productService.GetProductsByUserId(_user.Id);
+
+                vm.Accounts = products.FindAll(p =>
+                                p.Type == (int)ProductType.SavingAccount ||
+                                p.Type == (int)ProductType.MainSavingAccount);
+
+                vm.Loans = products.FindAll(p => p.Type == (int)ProductType.Loan);
+
+                return View(vm);
+            }
+
+            bool isEnoughAmount = await _productService.CheckAccountAmount(vm.Transaction.AccountFromId, vm.Transaction.Amount);
+            if (!isEnoughAmount)
+            {
+                ModelState.AddModelError("notEnoughAmount", "La transferencia sobrepasa el limite de la cuenta");
+
+                var products = await _productService.GetProductsByUserId(_user.Id);
+
+                vm.Accounts = products.FindAll(p =>
+                                p.Type == (int)ProductType.SavingAccount ||
+                                p.Type == (int)ProductType.MainSavingAccount);
+
+                vm.Loans = products.FindAll(p => p.Type == (int)ProductType.Loan);
+
+                return View(vm);
+            }
+
+            bool isMoreThanDebt = !(await _productService.CheckAccountAmount(vm.Transaction.AccountToId, vm.Transaction.Amount));
+            var card = await _productService.GetByIdSaveViewModel(vm.Transaction.AccountToId);
+
+            double trueAmount;
+            if (isMoreThanDebt)
+            {
+                trueAmount = card.Amount;
+            }
+            else
+            {
+                trueAmount = vm.Transaction.Amount;
+            }
+
+            vm.Transaction.Amount = trueAmount;
+
+            var transaction = await _transactionService.Add(vm.Transaction);
+
+            if (transaction == null)
+            {
+                ModelState.AddModelError("errorTransferingAmount", "Error pagando el prestamo");
+                return View(vm);
+            }
+
+            await _productService.SubstractAmountToProduct(transaction.AccountToId, transaction.Amount);
+
+            await _productService.SubstractAmountToProduct(transaction.AccountFromId, transaction.Amount);
+
+            return RedirectToAction("Index");
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public async Task<IActionResult> ExpressPay()
+        {
+            var products = await _productService.GetProductsByUserId(_user.Id);
+            ExpressPayViewModel expPay = new();
+
+            expPay.Accounts = products.FindAll(p =>
+                            p.Type == (int)ProductType.SavingAccount ||
+                            p.Type == (int)ProductType.MainSavingAccount);
+
+            expPay.Pay = new()
+            {
+                ClientId = _user.Id,
+                Type = (int)TransactionType.Direct
+            };
+
+            return View(expPay);
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        [HttpPost]
+        public async Task<IActionResult> ExpressPay(ExpressPayViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                var products = await _productService.GetProductsByUserId(_user.Id);
+
+                vm.Accounts = products.FindAll(p =>
+                                p.Type == (int)ProductType.SavingAccount ||
+                                p.Type == (int)ProductType.MainSavingAccount);
+
+                return View(vm);
+            }
+
+            if (vm.Pay.Amount < 0)
+            {
+                ModelState.AddModelError("amountNegative", "El monto no puede ser negativo");
+
+                var products = await _productService.GetProductsByUserId(_user.Id);
+
+                vm.Accounts = products.FindAll(p =>
+                                p.Type == (int)ProductType.SavingAccount ||
+                                p.Type == (int)ProductType.MainSavingAccount);
+
+                return View(vm);
+            }
+
+            var account = await _productService.GetByIdSaveViewModel(vm.Pay.AccountToId);
+            if (account == null)
+            {
+                ModelState.AddModelError("accountNumberNotValid", "El numero de cuenta ingresado no es valido");
+
+                var products = await _productService.GetProductsByUserId(_user.Id);
+
+                vm.Accounts = products.FindAll(p =>
+                                p.Type == (int)ProductType.SavingAccount ||
+                                p.Type == (int)ProductType.MainSavingAccount);
+
+                return View(vm);
+            }
+
+            bool isEnoughAmount = await _productService.CheckAccountAmount(vm.Pay.AccountFromId, vm.Pay.Amount);
+            if (!isEnoughAmount)
+            {
+                ModelState.AddModelError("notEnoughAmount", "La transferencia sobrepasa el limite de la cuenta");
+
+                var products = await _productService.GetProductsByUserId(_user.Id);
+
+                vm.Accounts = products.FindAll(p =>
+                                p.Type == (int)ProductType.SavingAccount ||
+                                p.Type == (int)ProductType.MainSavingAccount);
+
+                return View(vm);
+            }
+
+            var pay = await _transactionService.Add(vm.Pay);
+
+            if (pay == null)
+            {
+                ModelState.AddModelError("errorTransferingAmount", "Error al pagar a la cuenta soicitada");
+                return View(vm);
+            }
+
+            await _productService.SubstractAmountToProduct(pay.AccountFromId, pay.Amount);
+            await _productService.AddAmountToProduct(pay.AccountToId, pay.Amount);
+
+            return RedirectToAction("Index");
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public async Task<IActionResult> Beneficiaries(int errorType = 0)
         {
             var beneficiaries = await _beneficiaryService.GetBeneficiariesByUser(_user.Id);
@@ -143,6 +604,9 @@ namespace InternetBanking.Controllers
             return View(showBeneficiaries);
         }
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         [HttpPost]
         public async Task<IActionResult> AddBeneficiary(ShowBeneficiariesViewModel vm)
         {
@@ -176,12 +640,18 @@ namespace InternetBanking.Controllers
             return RedirectToAction("Beneficiaries");
         }
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public async Task<IActionResult> DeleteBeneficiary(int accountId)
         {
             await _beneficiaryService.DeleteByUserAndAccount(_user.Id, accountId);
             return RedirectToAction("Beneficiaries");
         }
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public async Task<IActionResult> MoneyAdvance()
         {
             var products = await _productService.GetProductsByUserId(_user.Id);
@@ -208,6 +678,9 @@ namespace InternetBanking.Controllers
             return View(moneyAdvance);
         }
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         [HttpPost]
         public async Task<IActionResult> MoneyAdvance(MoneyAdvanceViewModel vm)
         {
@@ -274,6 +747,9 @@ namespace InternetBanking.Controllers
             return RedirectToAction("Index");
         }
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public async Task<IActionResult> Transaction()
         {
             var products = await _productService.GetProductsByUserId(_user.Id);
@@ -298,6 +774,9 @@ namespace InternetBanking.Controllers
             return View(transferVM);
         }
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         [HttpPost]
         public async Task<IActionResult> Transaction(TransferMoneyViewModel vm)
         {

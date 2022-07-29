@@ -1,5 +1,4 @@
-﻿using InternetBanking.Core.Application.ViewModels.Pay;
-using InternetBanking.Core.Application.ViewModels.Product;
+﻿using InternetBanking.Core.Application.ViewModels.Product;
 using InternetBanking.Core.Application.ViewModels.Transaction;
 using System;
 using System.Collections.Generic;
@@ -21,7 +20,6 @@ namespace InternetBanking.Core.Application.ViewModels.User
         public bool IsActive { get; set; }
 
         public ICollection<ProductViewModel> Products { get; set; }
-        public ICollection<PayViewModel> Pays { get; set; }
         public ICollection<TransactionViewModel> Transactions { get; set; }
         public ICollection<ProductViewModel> Beneficiaries { get; set; }
     }

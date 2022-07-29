@@ -1,5 +1,52 @@
-﻿@{
-    ViewData["Title"] = "Pago para beneficiario";
+﻿@using InternetBanking.Core.Application.ViewModels.Transaction
+@model BeneficiariesPayViewModel
+@{
+    ViewData["Title"] = "Pago a Beneficiarios";
 }
 
-<h1>Pago para beneficiario</h1>
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="card">
+          <h5 class="card-header">Pago a Beneficiarios</h5>
+          <div class="card-body">
+            <form method="post" asp-action="ForBeneficiaryPay" asp-controller="Home">
+              @Html.ValidationSummary(false, "", new {@class = "text-danger"})
+                    @if (Model.Pay != null)
+                    {
+                        <div class="mb-3">
+                            <label asp-for="Pay.AccountToId" class="form-label">Beneficiario a pagar</label>
+                            <select class="form-select" asp-for="Pay.AccountToId" aria-label="Selecciona beneficiario">
+                                <option selected>Selecciona un beneficiario</option>
+                                @foreach (var ben in Model.Beneficiaries)
+                                {
+                                    <option value="@ben.AccountId">@ben.Name @ben.LastName (@ben.AccountId)</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Pay.AccountFromId" class="form-label">Cuenta de Ahorro</label>
+                            <select class="form-select" asp-for="Pay.AccountFromId" aria-label="Selecciona cuenta de ahorro">
+                                <option selected>Selecciona una cuenta</option>
+                                @foreach (var account in Model.Accounts)
+                                {
+                                    <option value="@account.Id">@account.Id ($@account.Amount)</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Pay.Amount" class="form-label">Monto a pagar</label>
+                            <input type="number" asp-for="Pay.Amount" step="any" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Pagar</button>
+                        <input type="hidden" asp-for="Pay.ClientId" />
+                        <input type="hidden" asp-for="Pay.Type" />
+                    }
+                    else
+                    {
+                        <a class="btn btn-secondary" asp-action="Index" asp-controller="Home">Volver</a>
+                    }
+                </form>
+          </div>
+        </div>
+    </div>
+</div>
